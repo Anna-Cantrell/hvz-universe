@@ -1,5 +1,31 @@
+enum Permission {
+  ADMIN
+  HUMAN
+  ZOMBIE
+  OZ
+  PLAYERCREATE
+  PLAYERUPDATE
+  PLAYERDELETE
+  PERMISSIONUPDATE
+}
+
 type User {
   id: ID! @id
   name: String!
-  email: String!
+  email: String! @unique
+  pronouns: String!
+  username: String! @unique
+  image: String
+  largeImage: String
+  password: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  permissions: [Permission] @scalarList(strategy: RELATION)
+}
+
+type Update {
+  id: ID! @id
+  title: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }

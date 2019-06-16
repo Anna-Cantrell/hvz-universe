@@ -1,12 +1,15 @@
-type User {
-  id: ID!,
-  name: String!
+# import * from './generated/prisma.graphql'
+
+type Mutation {
+  createUpdate(title: String): Update!
+  updateUser(id: ID!, name: String, email: String, pronouns: String, username: String, image: String): User!
+  deleteUser(id: ID!): User
+  signup(email: String!, password: String!, name: String!, username: String!, pronouns: String!, image: String): User!
 }
 
 type Query {
-  hi: String
-}
-
-type Mutation {
-  hi: String
+  updates: [Update]!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, first: Int): [User]!
+  user(where: UserWhereUniqueInput): User
+  usersConnection(where: UserWhereInput): UserConnection!
 }
