@@ -1,12 +1,12 @@
-import Updates from '../components/Updates';
 import Sidebar from '../components/Sidebar';
 import {PageContainer} from '../components/styles/GeneralStyles';
+import SinglePlayerPage from '../components/SinglePlayerPage';
 
-const Home = props => (
+const Player = props => (
   <PageContainer>
     <Sidebar />
-    <Updates />
+    <SinglePlayerPage username={props.query.username} />
   </PageContainer>
 );
 
-export default Home;
+export default Player;

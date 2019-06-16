@@ -3,7 +3,7 @@ import { NavStyles } from './styles/HeaderStyles';
 
 const Nav = () => (
   <NavStyles>
-    <Link href="/">
+    <Link href="/home">
       <a>Home</a>
     </Link>
     <Link href="/rules">
@@ -11,6 +11,9 @@ const Nav = () => (
     </Link>
     <Link href="/calendar">
       <a>Calendar</a>
+    </Link>
+    <Link href="/players">
+      <a>Players</a>
     </Link>
   </NavStyles>
 );

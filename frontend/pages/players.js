@@ -1,12 +1,12 @@
-import Updates from '../components/Updates';
+import PlayerList from '../components/PlayerList';
 import Sidebar from '../components/Sidebar';
 import {PageContainer} from '../components/styles/GeneralStyles';
 
-const Home = props => (
+const Players = props => (
   <PageContainer>
     <Sidebar />
-    <Updates />
+    <PlayerList page={parseFloat(props.query.page) || 1} />
   </PageContainer>
 );
 
-export default Home;
+export default Players;

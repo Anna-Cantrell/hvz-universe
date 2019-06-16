@@ -10,12 +10,14 @@ const theme = {
   teal: '#45e4e4',
   lightgray: '#cccccc',
   darkgray: '#383838',
-  maxWidth: '1000px',
+  maxWidth: '1240px',
   boxShadow: '0 12px 24px 0 rgba(0, 0, 0, 0.9)',
   fontRegular: 'font-weight: 400; font-style: normal;',
   fontMedium: 'font-weight: 500; font-style: normal;',
   fontBold: 'font-weight: 700; font-style: normal;',
   fontBoldItalic: 'font-weight: 700; font-style: italic;',
+  tablet: '680px',
+  desktop: '940px',
 };
 const StyledPage = styled.div`
   background: #fff;
@@ -51,7 +53,9 @@ class Page extends Component {
         <StyledPage>
           <Meta />
           <Header />
-          <Inner>{this.props.children}</Inner>
+          <Inner>
+            {this.props.children}
+          </Inner>
         </StyledPage>
       </ThemeProvider>
     );
