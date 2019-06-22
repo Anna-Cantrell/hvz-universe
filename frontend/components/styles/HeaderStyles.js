@@ -88,7 +88,7 @@ export const NavStyles = styled.div`
     background: ${props => props.theme.black};
     transition: background-color .3s;
     &:hover, &:focus {
-      border: none;
+      border-color: transparent;
       background: transparent;
       cursor: pointer;
     }
