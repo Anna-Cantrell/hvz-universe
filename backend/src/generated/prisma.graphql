@@ -1,5 +1,17 @@
 # source: https://us1.prisma.sh/anna-cantrell/hvz-universe/dev
-# timestamp: Sun Jun 16 2019 12:28:18 GMT-0400 (Eastern Daylight Time)
+# timestamp: Sun Jun 23 2019 12:04:00 GMT-0400 (Eastern Daylight Time)
+
+type AggregateCurrencyOne {
+  count: Int!
+}
+
+type AggregateCurrencyThree {
+  count: Int!
+}
+
+type AggregateCurrencyTwo {
+  count: Int!
+}
 
 type AggregateUpdate {
   count: Int!
@@ -14,6 +26,555 @@ type BatchPayload {
   count: Long!
 }
 
+type CurrencyOne implements Node {
+  id: ID!
+  name: String!
+}
+
+"""A connection to a list of items."""
+type CurrencyOneConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CurrencyOneEdge]!
+  aggregate: AggregateCurrencyOne!
+}
+
+input CurrencyOneCreateInput {
+  id: ID
+  name: String!
+}
+
+"""An edge in a connection."""
+type CurrencyOneEdge {
+  """The item at the end of the edge."""
+  node: CurrencyOne!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CurrencyOneOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+}
+
+type CurrencyOnePreviousValues {
+  id: ID!
+  name: String!
+}
+
+type CurrencyOneSubscriptionPayload {
+  mutation: MutationType!
+  node: CurrencyOne
+  updatedFields: [String!]
+  previousValues: CurrencyOnePreviousValues
+}
+
+input CurrencyOneSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CurrencyOneSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CurrencyOneSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CurrencyOneSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CurrencyOneWhereInput
+}
+
+input CurrencyOneUpdateInput {
+  name: String
+}
+
+input CurrencyOneUpdateManyMutationInput {
+  name: String
+}
+
+input CurrencyOneWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CurrencyOneWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CurrencyOneWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CurrencyOneWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+}
+
+input CurrencyOneWhereUniqueInput {
+  id: ID
+}
+
+type CurrencyThree implements Node {
+  id: ID!
+  name: String!
+}
+
+"""A connection to a list of items."""
+type CurrencyThreeConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CurrencyThreeEdge]!
+  aggregate: AggregateCurrencyThree!
+}
+
+input CurrencyThreeCreateInput {
+  id: ID
+  name: String!
+}
+
+"""An edge in a connection."""
+type CurrencyThreeEdge {
+  """The item at the end of the edge."""
+  node: CurrencyThree!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CurrencyThreeOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+}
+
+type CurrencyThreePreviousValues {
+  id: ID!
+  name: String!
+}
+
+type CurrencyThreeSubscriptionPayload {
+  mutation: MutationType!
+  node: CurrencyThree
+  updatedFields: [String!]
+  previousValues: CurrencyThreePreviousValues
+}
+
+input CurrencyThreeSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CurrencyThreeSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CurrencyThreeSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CurrencyThreeSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CurrencyThreeWhereInput
+}
+
+input CurrencyThreeUpdateInput {
+  name: String
+}
+
+input CurrencyThreeUpdateManyMutationInput {
+  name: String
+}
+
+input CurrencyThreeWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CurrencyThreeWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CurrencyThreeWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CurrencyThreeWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+}
+
+input CurrencyThreeWhereUniqueInput {
+  id: ID
+}
+
+type CurrencyTwo implements Node {
+  id: ID!
+  name: String!
+}
+
+"""A connection to a list of items."""
+type CurrencyTwoConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CurrencyTwoEdge]!
+  aggregate: AggregateCurrencyTwo!
+}
+
+input CurrencyTwoCreateInput {
+  id: ID
+  name: String!
+}
+
+"""An edge in a connection."""
+type CurrencyTwoEdge {
+  """The item at the end of the edge."""
+  node: CurrencyTwo!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CurrencyTwoOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+}
+
+type CurrencyTwoPreviousValues {
+  id: ID!
+  name: String!
+}
+
+type CurrencyTwoSubscriptionPayload {
+  mutation: MutationType!
+  node: CurrencyTwo
+  updatedFields: [String!]
+  previousValues: CurrencyTwoPreviousValues
+}
+
+input CurrencyTwoSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CurrencyTwoSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CurrencyTwoSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CurrencyTwoSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CurrencyTwoWhereInput
+}
+
+input CurrencyTwoUpdateInput {
+  name: String
+}
+
+input CurrencyTwoUpdateManyMutationInput {
+  name: String
+}
+
+input CurrencyTwoWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CurrencyTwoWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CurrencyTwoWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CurrencyTwoWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+}
+
+input CurrencyTwoWhereUniqueInput {
+  id: ID
+}
+
 scalar DateTime
 
 """
@@ -25,16 +586,34 @@ scalar Long
 type Mutation {
   createUser(data: UserCreateInput!): User!
   createUpdate(data: UpdateCreateInput!): Update!
+  createCurrencyOne(data: CurrencyOneCreateInput!): CurrencyOne!
+  createCurrencyTwo(data: CurrencyTwoCreateInput!): CurrencyTwo!
+  createCurrencyThree(data: CurrencyThreeCreateInput!): CurrencyThree!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateUpdate(data: UpdateUpdateInput!, where: UpdateWhereUniqueInput!): Update
+  updateCurrencyOne(data: CurrencyOneUpdateInput!, where: CurrencyOneWhereUniqueInput!): CurrencyOne
+  updateCurrencyTwo(data: CurrencyTwoUpdateInput!, where: CurrencyTwoWhereUniqueInput!): CurrencyTwo
+  updateCurrencyThree(data: CurrencyThreeUpdateInput!, where: CurrencyThreeWhereUniqueInput!): CurrencyThree
   deleteUser(where: UserWhereUniqueInput!): User
   deleteUpdate(where: UpdateWhereUniqueInput!): Update
+  deleteCurrencyOne(where: CurrencyOneWhereUniqueInput!): CurrencyOne
+  deleteCurrencyTwo(where: CurrencyTwoWhereUniqueInput!): CurrencyTwo
+  deleteCurrencyThree(where: CurrencyThreeWhereUniqueInput!): CurrencyThree
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertUpdate(where: UpdateWhereUniqueInput!, create: UpdateCreateInput!, update: UpdateUpdateInput!): Update!
+  upsertCurrencyOne(where: CurrencyOneWhereUniqueInput!, create: CurrencyOneCreateInput!, update: CurrencyOneUpdateInput!): CurrencyOne!
+  upsertCurrencyTwo(where: CurrencyTwoWhereUniqueInput!, create: CurrencyTwoCreateInput!, update: CurrencyTwoUpdateInput!): CurrencyTwo!
+  upsertCurrencyThree(where: CurrencyThreeWhereUniqueInput!, create: CurrencyThreeCreateInput!, update: CurrencyThreeUpdateInput!): CurrencyThree!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyUpdates(data: UpdateUpdateManyMutationInput!, where: UpdateWhereInput): BatchPayload!
+  updateManyCurrencyOnes(data: CurrencyOneUpdateManyMutationInput!, where: CurrencyOneWhereInput): BatchPayload!
+  updateManyCurrencyTwoes(data: CurrencyTwoUpdateManyMutationInput!, where: CurrencyTwoWhereInput): BatchPayload!
+  updateManyCurrencyThrees(data: CurrencyThreeUpdateManyMutationInput!, where: CurrencyThreeWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyUpdates(where: UpdateWhereInput): BatchPayload!
+  deleteManyCurrencyOnes(where: CurrencyOneWhereInput): BatchPayload!
+  deleteManyCurrencyTwoes(where: CurrencyTwoWhereInput): BatchPayload!
+  deleteManyCurrencyThrees(where: CurrencyThreeWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -78,10 +657,19 @@ enum Permission {
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   updates(where: UpdateWhereInput, orderBy: UpdateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Update]!
+  currencyOnes(where: CurrencyOneWhereInput, orderBy: CurrencyOneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CurrencyOne]!
+  currencyTwoes(where: CurrencyTwoWhereInput, orderBy: CurrencyTwoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CurrencyTwo]!
+  currencyThrees(where: CurrencyThreeWhereInput, orderBy: CurrencyThreeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CurrencyThree]!
   user(where: UserWhereUniqueInput!): User
   update(where: UpdateWhereUniqueInput!): Update
+  currencyOne(where: CurrencyOneWhereUniqueInput!): CurrencyOne
+  currencyTwo(where: CurrencyTwoWhereUniqueInput!): CurrencyTwo
+  currencyThree(where: CurrencyThreeWhereUniqueInput!): CurrencyThree
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   updatesConnection(where: UpdateWhereInput, orderBy: UpdateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UpdateConnection!
+  currencyOnesConnection(where: CurrencyOneWhereInput, orderBy: CurrencyOneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CurrencyOneConnection!
+  currencyTwoesConnection(where: CurrencyTwoWhereInput, orderBy: CurrencyTwoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CurrencyTwoConnection!
+  currencyThreesConnection(where: CurrencyThreeWhereInput, orderBy: CurrencyThreeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CurrencyThreeConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -93,6 +681,9 @@ type Query {
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   update(where: UpdateSubscriptionWhereInput): UpdateSubscriptionPayload
+  currencyOne(where: CurrencyOneSubscriptionWhereInput): CurrencyOneSubscriptionPayload
+  currencyTwo(where: CurrencyTwoSubscriptionWhereInput): CurrencyTwoSubscriptionPayload
+  currencyThree(where: CurrencyThreeSubscriptionWhereInput): CurrencyThreeSubscriptionPayload
 }
 
 type Update implements Node {
@@ -342,6 +933,9 @@ type User implements Node {
   resetToken: String
   resetTokenExpiry: Float
   permissions: [Permission!]!
+  currencyOne: Int
+  currencyTwo: Int
+  currencyThree: Int
 }
 
 """A connection to a list of items."""
@@ -365,6 +959,9 @@ input UserCreateInput {
   password: String!
   resetToken: String
   resetTokenExpiry: Float
+  currencyOne: Int
+  currencyTwo: Int
+  currencyThree: Int
   permissions: UserCreatepermissionsInput
 }
 
@@ -402,6 +999,12 @@ enum UserOrderByInput {
   resetToken_DESC
   resetTokenExpiry_ASC
   resetTokenExpiry_DESC
+  currencyOne_ASC
+  currencyOne_DESC
+  currencyTwo_ASC
+  currencyTwo_DESC
+  currencyThree_ASC
+  currencyThree_DESC
 }
 
 type UserPreviousValues {
@@ -416,6 +1019,9 @@ type UserPreviousValues {
   resetToken: String
   resetTokenExpiry: Float
   permissions: [Permission!]!
+  currencyOne: Int
+  currencyTwo: Int
+  currencyThree: Int
 }
 
 type UserSubscriptionPayload {
@@ -467,6 +1073,9 @@ input UserUpdateInput {
   password: String
   resetToken: String
   resetTokenExpiry: Float
+  currencyOne: Int
+  currencyTwo: Int
+  currencyThree: Int
   permissions: UserUpdatepermissionsInput
 }
 
@@ -480,6 +1089,9 @@ input UserUpdateManyMutationInput {
   password: String
   resetToken: String
   resetTokenExpiry: Float
+  currencyOne: Int
+  currencyTwo: Int
+  currencyThree: Int
   permissions: UserUpdatepermissionsInput
 }
 
@@ -878,6 +1490,72 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   resetTokenExpiry_gte: Float
+  currencyOne: Int
+
+  """All values that are not equal to given value."""
+  currencyOne_not: Int
+
+  """All values that are contained in given list."""
+  currencyOne_in: [Int!]
+
+  """All values that are not contained in given list."""
+  currencyOne_not_in: [Int!]
+
+  """All values less than the given value."""
+  currencyOne_lt: Int
+
+  """All values less than or equal the given value."""
+  currencyOne_lte: Int
+
+  """All values greater than the given value."""
+  currencyOne_gt: Int
+
+  """All values greater than or equal the given value."""
+  currencyOne_gte: Int
+  currencyTwo: Int
+
+  """All values that are not equal to given value."""
+  currencyTwo_not: Int
+
+  """All values that are contained in given list."""
+  currencyTwo_in: [Int!]
+
+  """All values that are not contained in given list."""
+  currencyTwo_not_in: [Int!]
+
+  """All values less than the given value."""
+  currencyTwo_lt: Int
+
+  """All values less than or equal the given value."""
+  currencyTwo_lte: Int
+
+  """All values greater than the given value."""
+  currencyTwo_gt: Int
+
+  """All values greater than or equal the given value."""
+  currencyTwo_gte: Int
+  currencyThree: Int
+
+  """All values that are not equal to given value."""
+  currencyThree_not: Int
+
+  """All values that are contained in given list."""
+  currencyThree_in: [Int!]
+
+  """All values that are not contained in given list."""
+  currencyThree_not_in: [Int!]
+
+  """All values less than the given value."""
+  currencyThree_lt: Int
+
+  """All values less than or equal the given value."""
+  currencyThree_lte: Int
+
+  """All values greater than the given value."""
+  currencyThree_gt: Int
+
+  """All values greater than or equal the given value."""
+  currencyThree_gte: Int
 }
 
 input UserWhereUniqueInput {

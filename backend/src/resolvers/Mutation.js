@@ -15,6 +15,85 @@ const Mutations = {
     return update;
   },
 
+  async updateCurrencyOneName(parent, args, ctx, info) {
+    // check if there is a currency one
+    const currencyOne = await ctx.db.query.currencyOnes({
+      first: 1
+    });
+    // If there's not - make one
+    if(currencyOne.length < 1) {
+      const currencyOne = await ctx.db.mutation.createCurrencyOne({
+        data: {
+          ...args
+        }
+      }, info);
+      return currencyOne;
+    }
+    // If there is - update it
+    return ctx.db.mutation.updateCurrencyOne({
+      data: {
+        ...args
+      },
+      where: {
+        id: currencyOne[0].id
+      }
+    }, info);
+    // return the currency
+    return currencyOne;
+  },
+  async updateCurrencyTwoName(parent, args, ctx, info) {
+    // check if there is a currency two
+    const currencyTwo = await ctx.db.query.currencyTwoes({
+      first: 1
+    });
+    // If there's not - make one
+    if(currencyTwo.length < 1) {
+      const currencyTwo = await ctx.db.mutation.createCurrencyTwo({
+        data: {
+          ...args
+        }
+      }, info);
+      return currencyTwo;
+    }
+    // If there is - update it
+    return ctx.db.mutation.updateCurrencyTwo({
+      data: {
+        ...args
+      },
+      where: {
+        id: currencyTwo[0].id
+      }
+    }, info);
+    // return the currency
+    return currencyTwo;
+  },
+  async updateCurrencyThreeName(parent, args, ctx, info) {
+    // check if there is a currency three
+    const currencyThree = await ctx.db.query.currencyThrees({
+      first: 1
+    });
+    // If there's not - make one
+    if(currencyThree.length < 1) {
+      const currencyThree = await ctx.db.mutation.createCurrencyThree({
+        data: {
+          ...args
+        }
+      }, info);
+      return currencyThree;
+    }
+    // If there is - update it
+    return ctx.db.mutation.updateCurrencyThree({
+      data: {
+        ...args
+      },
+      where: {
+        id: currencyThree[0].id
+      }
+    }, info);
+    // return the currency
+    return currencyThree;
+  },
+
   async signup(parent, args, ctx, info) {
     args.email = args.email.toLowerCase();
     // hash their password

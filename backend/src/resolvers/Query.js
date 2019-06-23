@@ -6,6 +6,9 @@ const Query = {
   usersConnection: forwardTo('db'),
 
   updates: forwardTo('db'),
+  currencyOnes: forwardTo('db'),
+  currencyTwoes: forwardTo('db'),
+  currencyThrees: forwardTo('db'),
 
 
   me(parent, args, ctx, info) {

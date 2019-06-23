@@ -13,6 +13,9 @@ type Mutation {
   signout: SuccessMessage
   requestReset(email: String!): SuccessMessage
   resetPassword(resetToken: String!, password: String!, confirmPassword: String!): User!
+  updateCurrencyOneName(name: String!): CurrencyOne!
+  updateCurrencyTwoName(name: String!): CurrencyTwo!
+  updateCurrencyThreeName(name: String!): CurrencyThree!
 }
 
 type Query {
@@ -21,6 +24,9 @@ type Query {
   user(where: UserWhereUniqueInput): User
   usersConnection(where: UserWhereInput): UserConnection!
   me: User
+  currencyOnes: [CurrencyOne]!
+  currencyTwoes: [CurrencyTwo]!
+  currencyThrees: [CurrencyThree]!
 }
 
 type User {

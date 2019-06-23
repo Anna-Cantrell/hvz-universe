@@ -21,6 +21,9 @@ type User {
   resetToken: String
   resetTokenExpiry: Float
   permissions: [Permission] @scalarList(strategy: RELATION)
+  currencyOne: Int
+  currencyTwo: Int
+  currencyThree: Int
 }
 
 type Update {
@@ -28,4 +31,17 @@ type Update {
   title: String!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+}
+
+type CurrencyOne {
+  id: ID! @id
+  name: String!
+}
+type CurrencyTwo {
+  id: ID! @id
+  name: String!
+}
+type CurrencyThree {
+  id: ID! @id
+  name: String!
 }
