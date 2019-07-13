@@ -11,7 +11,13 @@ const CURRENT_USER_QUERY = gql`
       pronouns
       username
       image
+      killCount
+      deathCode
+      classTitle
       permissions
+      currencyOne
+      currencyTwo
+      currencyThree
     }
   }
 `;

@@ -8,6 +8,7 @@ const Meta = () => (
     <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
     <link rel="stylesheet" href="https://use.typekit.net/hrw4joj.css" />
     <title>HvZ Universe</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </Head>
 );
 

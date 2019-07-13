@@ -19,7 +19,10 @@ type User {
   largeImage: String
   password: String!
   resetToken: String
+  classTitle: String
   resetTokenExpiry: Float
+  killCount: Int
+  deathCode: String! @unique
   permissions: [Permission] @scalarList(strategy: RELATION)
   currencyOne: Int
   currencyTwo: Int

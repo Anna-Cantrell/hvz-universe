@@ -5,7 +5,7 @@ const UpdateStyles = styled.div`
   position: relative;
   margin: 10px 0;
   border-radius: 5px;
-  background: #eee;
+  background: #fff;
   padding: 15px 20px;
 `;
 

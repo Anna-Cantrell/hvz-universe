@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Router from 'next/router';
-import ALL_USERS_QUERY from './PlayerList';
+import ALL_USERS_QUERY from '../PlayerList';
 
-import Form from './styles/FormStyles';
-import Error from './ErrorMessage';
+import Form from '../styles/FormStyles';
+import Error from '../ErrorMessage';
 
 const CREATE_UPDATE_MUTATION = gql`
   mutation CREATE_UPDATE_MUTATION( $title: String! ) {

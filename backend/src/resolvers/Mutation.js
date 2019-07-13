@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const { randomBytes } = require('crypto');
 const { promisify } = require('util');
 const { transport, makeANiceEmail } = require('../mail');
+const { hasPermission } = require('../utils');
 
 const Mutations = {
   async createUpdate(parent, args, ctx, info) {
@@ -98,11 +99,22 @@ const Mutations = {
     args.email = args.email.toLowerCase();
     // hash their password
     const password = await bcrypt.hash(args.password, 10);
+    // create death code
+    const deathCodeNum = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
+    const deathSuffix = String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97);
+    const deathCode = args.username.toLowerCase().split('').slice(0, 4).join('') + deathCodeNum + deathSuffix;
+    const alreadyDeathCode = await ctx.db.query.user({ where: { deathCode } });
+    if(alreadyDeathCode) {
+      deathCodeNum = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
+      deathSuffix = String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97);
+      deathCode = args.username.toLowerCase().split('').slice(0, 4).join('') + deathCodeNum + deathSuffix;
+    }
     // create user in the database
     const user = await ctx.db.mutation.createUser({
       data: {
         ...args,
         password,
+        deathCode,
         permissions: { set: ['HUMAN'] },
       }
     }, info);
@@ -134,9 +146,13 @@ const Mutations = {
   async deleteUser(parent, args, ctx, info) {
     const where = { id: args.id };
     // find the user
-    const item = await ctx.db.query.user({where}, `{ id name}`);
+    const item = await ctx.db.query.user({where}, `{ id name }`);
     // check if they have the permission to do it
-    // TO DO
+    const ownsUser = item.id === ctx.request.userId;
+    const hasPermissions = ctx.request.user.permissions.some(permission => ['ADMIN', 'PLAYERDELETE'].includes(permission));
+    if(!ownsUser && !hasPermissions) {
+      throw new Error("You don't have permission to do that!");
+    }
     // delete it!
     return ctx.db.mutation.deleteUser({ where }, info);
   },
@@ -230,6 +246,28 @@ const Mutations = {
     // return the new user
     return updatedUser;
   },
+
+  async updatePermissions(parent, args, ctx, info) {
+    // 1. check if they're logged in
+    if(!ctx.request.userId) {
+      throw new Error('You must be logged in to do that!');
+    }
+    // 2. query current user
+    const currentUser = await ctx.db.query.user({
+      where: {
+        id: ctx.request.userId,
+      },
+    }, info);
+    // 3. Check if they have permissions to do this
+    hasPermission(currentUser, ['ADMIN', 'PERMISSIONUPDATE']);
+    // 4. update the permissions
+    return ctx.db.mutation.updateUser({
+      data: {
+        permissions: { set: args.permissions },
+      },
+      where: { id: args.userId },
+    }, info);
+  }
 
 };
 

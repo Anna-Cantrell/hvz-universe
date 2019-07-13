@@ -29,7 +29,7 @@ const DELETE_USER_MUTATION = gql`
          {(deleteUser, { error }) => (
            <button onClick={() => {
                if(confirm('Are you sure you want to delete this user?')) {
-                 deleteUser();
+                 deleteUser().catch(err => { alert(err.message) });
                }
              }}>{this.props.children}</button>
          )}

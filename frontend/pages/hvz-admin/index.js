@@ -1,8 +1,17 @@
+import AdminSidebar from '../../components/admin/AdminSidebar';
+import { PageContainer } from '../../components/styles/GeneralStyles';
+import PleaseSignIn from '../../components/PleaseSignIn';
+
 const Admin = props => (
-  <div>
-    <p>💻</p>
-    <p>This is the Admin page!!</p>
-  </div>
+  <PleaseSignIn>
+    <PageContainer>
+      <AdminSidebar />
+      <div>
+        <p>💻</p>
+        <p>This is the Admin page!!</p>
+      </div>
+    </PageContainer>
+  </PleaseSignIn>
 );
 
 export default Admin;

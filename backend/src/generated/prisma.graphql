@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/anna-cantrell/hvz-universe/dev
-# timestamp: Sun Jun 23 2019 12:04:00 GMT-0400 (Eastern Daylight Time)
+# timestamp: Sun Jul 07 2019 12:34:28 GMT-0400 (Eastern Daylight Time)
 
 type AggregateCurrencyOne {
   count: Int!
@@ -931,7 +931,10 @@ type User implements Node {
   largeImage: String
   password: String!
   resetToken: String
+  classTitle: String
   resetTokenExpiry: Float
+  killCount: Int
+  deathCode: String!
   permissions: [Permission!]!
   currencyOne: Int
   currencyTwo: Int
@@ -958,7 +961,10 @@ input UserCreateInput {
   largeImage: String
   password: String!
   resetToken: String
+  classTitle: String
   resetTokenExpiry: Float
+  killCount: Int
+  deathCode: String!
   currencyOne: Int
   currencyTwo: Int
   currencyThree: Int
@@ -997,8 +1003,14 @@ enum UserOrderByInput {
   password_DESC
   resetToken_ASC
   resetToken_DESC
+  classTitle_ASC
+  classTitle_DESC
   resetTokenExpiry_ASC
   resetTokenExpiry_DESC
+  killCount_ASC
+  killCount_DESC
+  deathCode_ASC
+  deathCode_DESC
   currencyOne_ASC
   currencyOne_DESC
   currencyTwo_ASC
@@ -1017,7 +1029,10 @@ type UserPreviousValues {
   largeImage: String
   password: String!
   resetToken: String
+  classTitle: String
   resetTokenExpiry: Float
+  killCount: Int
+  deathCode: String!
   permissions: [Permission!]!
   currencyOne: Int
   currencyTwo: Int
@@ -1072,7 +1087,10 @@ input UserUpdateInput {
   largeImage: String
   password: String
   resetToken: String
+  classTitle: String
   resetTokenExpiry: Float
+  killCount: Int
+  deathCode: String
   currencyOne: Int
   currencyTwo: Int
   currencyThree: Int
@@ -1088,7 +1106,10 @@ input UserUpdateManyMutationInput {
   largeImage: String
   password: String
   resetToken: String
+  classTitle: String
   resetTokenExpiry: Float
+  killCount: Int
+  deathCode: String
   currencyOne: Int
   currencyTwo: Int
   currencyThree: Int
@@ -1468,6 +1489,46 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   resetToken_not_ends_with: String
+  classTitle: String
+
+  """All values that are not equal to given value."""
+  classTitle_not: String
+
+  """All values that are contained in given list."""
+  classTitle_in: [String!]
+
+  """All values that are not contained in given list."""
+  classTitle_not_in: [String!]
+
+  """All values less than the given value."""
+  classTitle_lt: String
+
+  """All values less than or equal the given value."""
+  classTitle_lte: String
+
+  """All values greater than the given value."""
+  classTitle_gt: String
+
+  """All values greater than or equal the given value."""
+  classTitle_gte: String
+
+  """All values containing the given string."""
+  classTitle_contains: String
+
+  """All values not containing the given string."""
+  classTitle_not_contains: String
+
+  """All values starting with the given string."""
+  classTitle_starts_with: String
+
+  """All values not starting with the given string."""
+  classTitle_not_starts_with: String
+
+  """All values ending with the given string."""
+  classTitle_ends_with: String
+
+  """All values not ending with the given string."""
+  classTitle_not_ends_with: String
   resetTokenExpiry: Float
 
   """All values that are not equal to given value."""
@@ -1490,6 +1551,68 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   resetTokenExpiry_gte: Float
+  killCount: Int
+
+  """All values that are not equal to given value."""
+  killCount_not: Int
+
+  """All values that are contained in given list."""
+  killCount_in: [Int!]
+
+  """All values that are not contained in given list."""
+  killCount_not_in: [Int!]
+
+  """All values less than the given value."""
+  killCount_lt: Int
+
+  """All values less than or equal the given value."""
+  killCount_lte: Int
+
+  """All values greater than the given value."""
+  killCount_gt: Int
+
+  """All values greater than or equal the given value."""
+  killCount_gte: Int
+  deathCode: String
+
+  """All values that are not equal to given value."""
+  deathCode_not: String
+
+  """All values that are contained in given list."""
+  deathCode_in: [String!]
+
+  """All values that are not contained in given list."""
+  deathCode_not_in: [String!]
+
+  """All values less than the given value."""
+  deathCode_lt: String
+
+  """All values less than or equal the given value."""
+  deathCode_lte: String
+
+  """All values greater than the given value."""
+  deathCode_gt: String
+
+  """All values greater than or equal the given value."""
+  deathCode_gte: String
+
+  """All values containing the given string."""
+  deathCode_contains: String
+
+  """All values not containing the given string."""
+  deathCode_not_contains: String
+
+  """All values starting with the given string."""
+  deathCode_starts_with: String
+
+  """All values not starting with the given string."""
+  deathCode_not_starts_with: String
+
+  """All values ending with the given string."""
+  deathCode_ends_with: String
+
+  """All values not ending with the given string."""
+  deathCode_not_ends_with: String
   currencyOne: Int
 
   """All values that are not equal to given value."""
@@ -1562,4 +1685,5 @@ input UserWhereUniqueInput {
   id: ID
   email: String
   username: String
+  deathCode: String
 }

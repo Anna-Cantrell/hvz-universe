@@ -24,12 +24,6 @@ class PlayerSingle extends Component {
             <div>{user.pronouns}</div>
           </a>
         </Link>
-        <Link href={{
-            pathname: "update",
-            query: { id: user.id }
-        }}>
-            <a>Edit ✏️</a>
-        </Link>
         <DeleteUser id={user.id}>Delete User</DeleteUser>
       </UpdateStyles>
     );

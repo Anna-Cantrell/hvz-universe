@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Router from 'next/router';
-import ALL_USERS_QUERY from './PlayerList';
+import ALL_USERS_QUERY from '../PlayerList';
 
-import Form from './styles/FormStyles';
-import Error from './ErrorMessage';
+import Form from '../styles/FormStyles';
+import Error from '../ErrorMessage';
 
 const CREATE_USER_MUTATION = gql`
   mutation CREATE_USER_MUTATION(
@@ -32,10 +32,10 @@ const CREATE_USER_MUTATION = gql`
 
 class CreatePlayer extends Component {
   state = {
-    name: 'anna',
-    email: 'annatest@gmail.com',
-    pronouns: 'she her hers',
-    username: 'superzombie',
+    name: '',
+    email: '',
+    pronouns: '',
+    username: '',
     image: '',
     largeImage: '',
   };

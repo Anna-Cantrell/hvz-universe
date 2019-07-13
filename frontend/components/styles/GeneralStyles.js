@@ -5,6 +5,7 @@ export const PageContainer = styled.div`
   position: relative;
   display: flex;
   flex-wrap: wrap-reverse;
+  align-items: flex-start;
   @media (min-width: ${props => props.theme.tablet}) {
     flex-wrap: nowrap;
   }

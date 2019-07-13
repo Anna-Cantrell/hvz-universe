@@ -16,6 +16,7 @@ type Mutation {
   updateCurrencyOneName(name: String!): CurrencyOne!
   updateCurrencyTwoName(name: String!): CurrencyTwo!
   updateCurrencyThreeName(name: String!): CurrencyThree!
+  updatePermissions(permissions: [Permission], userId: ID!): User
 }
 
 type Query {
@@ -27,6 +28,7 @@ type Query {
   currencyOnes: [CurrencyOne]!
   currencyTwoes: [CurrencyTwo]!
   currencyThrees: [CurrencyThree]!
+  adminUsers: [User]!
 }
 
 type User {
@@ -37,5 +39,11 @@ type User {
   username: String!
   image: String
   largeImage: String
+  classTitle: String
+  killCount: Int
+  deathCode: String!
   permissions: [Permission!]!
+  currencyOne: Int
+  currencyTwo: Int
+  currencyThree: Int
 }

@@ -4,6 +4,9 @@ import gql from 'graphql-tag';
 
 const Actions = () => (
   <div>
+    <Link href="/hvz-admin/">
+      <a><button>Admin Page</button></a>
+    </Link>
     <Link href="/hvz-admin/custom-updates">
       <a><button>Add New Updates</button></a>
     </Link>

@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { Mutation, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Router from 'next/router';
-import {CURRENCY_THREE_QUERY} from './ListCurrencies';
+import {CURRENCY_TWO_QUERY} from '../ListCurrencies';
 
-import Form from './styles/FormStyles';
-import Error from './ErrorMessage';
+import Form from '../styles/FormStyles';
+import Error from '../ErrorMessage';
 
-const UPDATE_CURRENCY_THREE_MUTATION = gql`
-  mutation UPDATE_CURRENCY_THREE_MUTATION(
+const UPDATE_CURRENCY_TWO_MUTATION = gql`
+  mutation UPDATE_CURRENCY_TWO_MUTATION(
     $name: String!
   ) {
-    updateCurrencyThreeName (
+    updateCurrencyTwoName (
       name: $name
     ) {
       name
@@ -20,9 +20,9 @@ const UPDATE_CURRENCY_THREE_MUTATION = gql`
 `;
 
 
-class UpdateCurrencyNames extends Component {
+class UpdateCurrencyNameTwo extends Component {
   state = {
-    currencyThree: '',
+    currencyTwo: '',
   };
   handleChange = (e) => {
     const { name, type, value } = e.target;
@@ -32,37 +32,36 @@ class UpdateCurrencyNames extends Component {
 
   render() {
     return (
-      <Query query={CURRENCY_THREE_QUERY}>
-        { ({data: { currencyThrees }, error, loading}) => {
+      <Query query={CURRENCY_TWO_QUERY}>
+        { ({data: { currencyTwoes }, error, loading}) => {
           if(loading) return <p>loading...</p>;
           if(error) return <p>Error: {error.message}</p>;
           return (
             <Mutation
-              mutation={UPDATE_CURRENCY_THREE_MUTATION}
-              variables={{ name: this.state.currencyThree }}
-              refetchQueries={[{ query: CURRENCY_THREE_QUERY }]}
+              mutation={UPDATE_CURRENCY_TWO_MUTATION}
+              variables={{ name: this.state.currencyTwo }}
+              refetchQueries={[{ query: CURRENCY_TWO_QUERY }]}
             >
-              {(updateCurrencyThreeName, { loading, error }) => (
+              {(updateCurrencyTwoName, { loading, error }) => (
 
                 <Form onSubmit={async (e) => {
                     // stop the form from submitting
                     e.preventDefault();
                     // call the mutation
-                    console.log(this.state.currencyThree);
-                    const res = await updateCurrencyThreeName();
+                    console.log(this.state.currencyTwo);
+                    const res = await updateCurrencyTwoName();
                     console.log(res);
                   }}>
                   <Error error={error} />
                   <fieldset disabled={loading} aria-busy={loading}>
                     <label htmlFor="title">
-                      Currency Three Name
+                      Currency Two Name
                       <input
                         type="text"
-                        id="currencyThree"
-                        name="currencyThree"
-                        placeholder="Currency Three Title"
-                        required
-                        defaultValue={currencyThrees[0] && currencyThrees[0].name}
+                        id="currencyTwo"
+                        name="currencyTwo"
+                        placeholder="Currency Two Title"
+                        defaultValue={currencyTwoes[0] && currencyTwoes[0].name}
                         onChange={this.handleChange}
                       />
                     </label>
@@ -80,4 +79,4 @@ class UpdateCurrencyNames extends Component {
   }
 }
 
-export default UpdateCurrencyNames;
+export default UpdateCurrencyNameTwo;

@@ -8,8 +8,11 @@ const theme = {
   pink: '#cf3be4',
   blue: '#4560d8',
   teal: '#45e4e4',
+  purple: '#9286e4',
   lightgray: '#cccccc',
+  offWhite: '#efefef',
   darkgray: '#383838',
+  background: '#f6f0f7',
   maxWidth: '1240px',
   boxShadow: '0 12px 24px 0 rgba(0, 0, 0, 0.9)',
   fontRegular: 'font-weight: 400; font-style: normal;',
@@ -20,7 +23,6 @@ const theme = {
   desktop: '940px',
 };
 const StyledPage = styled.div`
-  background: #fff;
   color: ${props => props.theme.black};
 `;
 const Inner = styled.div`
@@ -35,6 +37,10 @@ injectGlobal`
     padding: 0;
     margin: 0;
     font-family: montserrat, sans-serif;
+    background: #f6f0f7;
+  }
+  a {
+    text-decoration: none;
   }
   * {
     -webkit-font-smoothing: antialiased;

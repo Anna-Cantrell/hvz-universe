@@ -3,6 +3,10 @@ import styled from 'styled-components';
 const HeaderStyles = styled.div`
   background: linear-gradient(270deg, #cf3be4, #4560d8, #45e4e4, #4560d8, #cf3be4, #45e4e4);
   background-size: 300% 300%;
+  &.zombie {
+    background: linear-gradient(270deg, #DC143C, #222, #DC143C, #FB6C9D, #DC143C, #222);
+    background-size: 300% 300%;
+  }
 
   -webkit-animation: galaxyThrust 40s ease infinite;
   -moz-animation: galaxyThrust 40s ease infinite;
