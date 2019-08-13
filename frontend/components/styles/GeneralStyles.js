@@ -8,6 +8,7 @@ export const PageContainer = styled.div`
   align-items: flex-start;
   max-width: ${props => props.theme.maxWidth};
   margin: 0 auto;
+  min-height: 100vh;
   @media (min-width: ${props => props.theme.desktop}) {
     flex-wrap: nowrap;
     padding: 20px;
@@ -25,6 +26,10 @@ export const PageContainer = styled.div`
     max-width: none;
   }
   strong { ${props => props.theme.fontBold} }
+  form {
+    max-width: 400px;
+    margin: 0 30px;
+  }
   .btn {
     text-transform: uppercase;
     background-color: #fff;

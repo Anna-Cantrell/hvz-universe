@@ -316,7 +316,10 @@ const Mutations = {
   async signup(parent, args, ctx, info) {
     args.email = args.email.toLowerCase();
     // hash their password
+    if(args.password !== args.pwCheck) throw new Error("Your passwords don't match!");
+    delete args.pwCheck;
     const password = await bcrypt.hash(args.password, 10);
+
     // create death code
     const deathCodeNum = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
     const deathSuffix = String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97);
@@ -327,6 +330,14 @@ const Mutations = {
       deathSuffix = String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97);
       deathCode = args.username.toLowerCase().split('').slice(0, 4).join('') + deathCodeNum + deathSuffix;
     }
+
+    const username = args.username;
+    const alreadyUsername = await ctx.db.query.user({ where: { username } });
+    if(alreadyUsername) throw new Error("That username is already taken!");
+
+    const email = args.email;
+    const alreadyemail = await ctx.db.query.user({ where: { email } });
+    if(alreadyemail) throw new Error("Looks like that email is already being used.");
     // create user in the database
     const user = await ctx.db.mutation.createUser({
       data: {

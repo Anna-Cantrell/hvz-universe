@@ -36,16 +36,20 @@ class Signin extends Component {
                 <h2>Request Password Reset</h2>
                 <Error error={error} />
                 {!error && !loading && called && <p>Check your email for a reset link!</p>}
-                <label htmlFor="email">
-                  Email
-                  <input
-                    type="text"
-                    name="email"
-                    placeholder="email"
-                    value={this.state.email}
-                    onChange={this.saveToState} />
-                </label>
-                <button type="submit">Request Reset</button>
+                <div className="fields-container signin">
+                  <label htmlFor="email">
+                    Email
+                    <input
+                      type="text"
+                      name="email"
+                      placeholder="email"
+                      value={this.state.email}
+                      onChange={this.saveToState} />
+                  </label>
+                </div>
+                <div class="submit-container">
+                  <button type="submit">Request Reset</button>
+                </div>
               </fieldset>
             </Form>
           );

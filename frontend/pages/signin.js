@@ -5,7 +5,6 @@ import RequestReset from '../components/RequestReset';
 
 const SignupPage = props => (
   <PageContainer>
-    <Signup />
     <Signin />
     <RequestReset />
   </PageContainer>

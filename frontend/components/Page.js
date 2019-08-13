@@ -48,6 +48,9 @@ injectGlobal`
     -moz-osx-font-smoothing: grayscale;
     box-sizing: inherit;
   }
+  .wrapper {
+    max-width: 1280px;
+  }
   h1 {
     margin: 0;
     font-weight: 900;

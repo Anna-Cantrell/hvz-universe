@@ -50,25 +50,29 @@ class Signin extends Component {
               <fieldset disabled={loading} aria-busy={loading}>
                 <h2>Sign in!</h2>
                 <Error error={error} />
-                <label htmlFor="email">
-                  Email
-                  <input
-                    type="text"
-                    name="email"
-                    placeholder="email"
-                    value={this.state.email}
-                    onChange={this.saveToState} />
-                </label>
-                <label htmlFor="password">
-                  Password
-                  <input
-                    type="password"
-                    name="password"
-                    placeholder="password"
-                    value={this.state.password}
-                    onChange={this.saveToState} />
-                </label>
-                <button type="submit">Sign In</button>
+                <div className="fields-container signin">
+                  <label htmlFor="email">
+                    Email
+                    <input
+                      type="text"
+                      name="email"
+                      placeholder="email"
+                      value={this.state.email}
+                      onChange={this.saveToState} />
+                  </label>
+                  <label htmlFor="password">
+                    Password
+                    <input
+                      type="password"
+                      name="password"
+                      placeholder="password"
+                      value={this.state.password}
+                      onChange={this.saveToState} />
+                  </label>
+                </div>
+                <div className="submit-container">
+                  <button type="submit">Sign In</button>
+                </div>
               </fieldset>
             </Form>
           );

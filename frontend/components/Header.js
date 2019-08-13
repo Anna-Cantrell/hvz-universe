@@ -32,7 +32,7 @@ class Header extends Component {
           <div className="bar">
           <div className="nav-container">
           <Link href="/">
-          <a className="logo"><img src="../static/hvz-universe-logo-white.png" /></a>
+            <a className="logo"><img src="../static/hvz-universe-logo-white.png" /></a>
           </Link>
           <Nav />
           </div>
