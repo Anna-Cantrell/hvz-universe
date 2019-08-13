@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import UpdateStyles from './styles/UpdateStyles';
+import {SingleUpdateStyles} from './styles/UpdatesStyles';
+import formatDate from '../lib/formatDate';
 
 
 class UpdateSingle extends Component {
@@ -9,13 +10,14 @@ class UpdateSingle extends Component {
   };
   render () {
     const { update } = this.props;
+    const dt = new Date(update.createdAt);
     return (
-      <UpdateStyles>
+      <SingleUpdateStyles>
         <div>
-          <h3>{update.title}</h3>
-          <p>{update.createdAt}</p>
+          <p dangerouslySetInnerHTML={{__html: update.title}} />
+          <p>{formatDate(dt, "dddd, MMM d, yyyy h:mmtt")}</p>
         </div>
-      </UpdateStyles>
+      </SingleUpdateStyles>
     );
   }
 }

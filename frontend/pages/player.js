@@ -6,8 +6,8 @@ import PleaseSignIn from '../components/PleaseSignIn';
 
 const Player = props => (
   <PleaseSignIn>
-    <PageContainer>
-      <Sidebar />
+    <PageContainer className="compressed">
+      <Sidebar type="compressed" />
       <User>
         {({ data: { me } }) => {
           return (

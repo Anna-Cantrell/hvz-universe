@@ -4,7 +4,7 @@ import PleaseSignIn from '../../components/PleaseSignIn';
 
 const Admin = props => (
   <PleaseSignIn>
-    <PageContainer>
+    <PageContainer className="admin-page">
       <AdminSidebar />
       <div>
         <p>💻</p>

@@ -3,3 +3,4 @@ export const endpoint = `http://localhost:4444`;
 export const perPage = 4;
 export const title = "HvZ Universe";
 export const playersPerPage = 3;
+export const updatesPerPage = 20;

@@ -6,8 +6,9 @@ import {CURRENCY_ONE_QUERY, CURRENCY_TWO_QUERY, CURRENCY_THREE_QUERY} from './Li
 
 
 const Currency = props => (
-  <div>
+  <div className="currency-container">
     <div>Currency has</div>
+    <div className="currency-fields">
     <Query query={CURRENCY_ONE_QUERY}>
       { ({data, error, loading}) => {
         if(loading) return <p>loading...</p>;
@@ -44,7 +45,7 @@ const Currency = props => (
         );
       } }
     </Query>
-    <button>Send monies</button>
+    </div>
   </div>
 );
 

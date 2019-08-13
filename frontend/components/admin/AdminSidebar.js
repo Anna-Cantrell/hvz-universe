@@ -5,14 +5,14 @@ import { CURRENT_USER_QUERY } from '../User';
 
 
 const AdminSidebar = () => (
-  <SidebarStyles>
+  <SidebarStyles className="admin-sidebar">
     <Query query={CURRENT_USER_QUERY}>
       {({data, loading}) => {
         if(loading) return <p>...loading</p>;
         if(!data.me) return <p>Please log in</p>
         if(!data.me.permissions.includes('ADMIN')) return <p>This is an admin area.</p>;
         return (
-          <div>
+          <div className="main-sidebar">
             <Link href="/hvz-admin/">
               <a>Dashboard</a>
             </Link><br />

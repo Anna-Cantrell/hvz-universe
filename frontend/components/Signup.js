@@ -79,6 +79,8 @@ class Signup extends Component {
                   <input
                     type="text"
                     name="username"
+                    pattern="^[a-zA-Z0-9]*$"
+                    maxlength="40"
                     placeholder="username"
                     value={this.state.username}
                     onChange={this.saveToState} />

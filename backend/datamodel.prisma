@@ -23,15 +23,29 @@ type User {
   resetTokenExpiry: Float
   killCount: Int
   deathCode: String! @unique
+  filterStatus: String
+  admin: Boolean
   permissions: [Permission] @scalarList(strategy: RELATION)
   currencyOne: Int
   currencyTwo: Int
   currencyThree: Int
 }
 
+type LootBox {
+  id: ID! @id
+  unlockCode: String! @unique
+  title: String!
+  description: String!
+  effect: String!
+  newTitle: String!
+  newLife: String!
+  claimed: Boolean!
+}
+
 type Update {
   id: ID! @id
   title: String!
+  image: String
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

@@ -14,6 +14,9 @@ const SINGLE_USER_QUERY = gql`
       email
       pronouns
       image
+      username
+      classTitle
+      deathCode
     }
   }
 `;
@@ -25,6 +28,7 @@ const UPDATE_ITEM_MUTATION = gql`
     $email: String
     $pronouns: String
     $image: String
+    $classTitle: String
   ) {
     updateUser(
       id: $id
@@ -32,6 +36,7 @@ const UPDATE_ITEM_MUTATION = gql`
       email: $email
       pronouns: $pronouns
       image: $image
+      classTitle: $classTitle
     ) {
       id
       name
@@ -51,6 +56,7 @@ class UpdatePlayer extends Component {
 
   uploadFile = async (e) => {
     console.log('uploading file...');
+    $('button[type="submit"]').prop('disabled', true);
     const files = e.target.files;
     const data = new FormData();
     data.append('file', files[0]);
@@ -64,8 +70,9 @@ class UpdatePlayer extends Component {
     console.log(file);
     this.setState({
       image: file.secure_url,
-      largeImage: file.eager[0].secure_url
+      largeImage: file.eager && file.eager[0].secure_url
     });
+    $('button[type="submit"]').prop('disabled', false);
   }
 
   updateUser = async (e, updateUserMutation) => {
@@ -88,6 +95,7 @@ class UpdatePlayer extends Component {
         {({data,loading}) => {
           if(loading) return <p>Loading...</p>;
           if(!data.user) return <p>No User Found</p>;
+          if(this.props.id !== this.props.me.id && !this.props.me.permissions.includes('ADMIN')) return <p>Edit your own stuff!</p>;
           return(
 
             <Mutation
@@ -108,7 +116,7 @@ class UpdatePlayer extends Component {
                         placeholder="Upload a profile photo"
                         onChange={this.uploadFile}
                       />
-                    {data.user.image && <img src={data.user.image} alt="Upload Preview" />}
+                    {this.state.image && <img src={this.state.image} alt="Upload Preview" />}
                     </label>
                     <label htmlFor="name">
                       Name
@@ -148,6 +156,48 @@ class UpdatePlayer extends Component {
                         onChange={this.handleChange}
                       />
                     </label>
+
+                    {this.props.me.permissions.includes('ADMIN') && (
+                      <div className="admin-area">
+                        <p>These are administrative changes to the profile. Double check your changes before you submit!</p>
+                        <label htmlFor="username">
+                          Username
+                          <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Username"
+                            required
+                            defaultValue={data.user.username}
+                            onChange={this.handleChange}
+                          />
+                        </label>
+                        <label htmlFor="classTitle">
+                          Class Title
+                          <input
+                            type="text"
+                            id="classTitle"
+                            name="classTitle"
+                            placeholder="Class Title"
+                            required
+                            defaultValue={data.user.classTitle}
+                            onChange={this.handleChange}
+                          />
+                        </label>
+                        <label htmlFor="deathCode">
+                          Death Code
+                          <input
+                            type="text"
+                            id="deathCode"
+                            name="deathCode"
+                            placeholder="Death Code"
+                            required
+                            defaultValue={data.user.deathCode}
+                            onChange={this.handleChange}
+                          />
+                        </label>
+                      </div>
+                    )}
 
                     <button type="submit">Sav{loading ? 'ing' : 'e'} Changes</button>
                   </fieldset>

@@ -1,10 +1,14 @@
 
 import UpdatePlayer from '../components/UpdatePlayer';
+import User from '../components/User';
 
 const updatePlayer = props => (
-  <div>
-    <UpdatePlayer id={props.query.id} />
-  </div>
+  <User>
+    {({ data: { me } }) => {
+      if(!me) return <p>You have to be logged in for that!</p>;
+      return <UpdatePlayer me={me} id={props.query.id} />;
+    }}
+  </User>
 );
 
 export default updatePlayer;

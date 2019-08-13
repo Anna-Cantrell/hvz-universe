@@ -7,13 +7,231 @@ const { hasPermission } = require('../utils');
 
 const Mutations = {
   async createUpdate(parent, args, ctx, info) {
-    // TODO: Chck if they are logged in
+    // 1. check if they're logged in
+    if(!ctx.request.userId) {
+      throw new Error('You must be logged in to do that!');
+    }
     const update = await ctx.db.mutation.createUpdate({
       data: {
         ...args
       }
     }, info);
     return update;
+  },
+
+  async createLootBox(parent, args, ctx, info) {
+    // 1. check if they're logged in
+    if(!ctx.request.userId) {
+      throw new Error('You must be logged in to do that!');
+    }
+    const hasPermission = ctx.request.user.permissions.some(permission => ['ADMIN'].includes(permission));
+    if(!hasPermission) {
+      throw new Error('You aren\'t allowed to do that!');
+    }
+    const lootbox = await ctx.db.mutation.createLootBox({
+      data: {
+        ...args,
+        claimed: false
+      }
+    }, info);
+    return lootbox;
+  },
+  async destroyLootBox(parent, args, ctx, info) {
+    const where = { id: args.id };
+    // find the loot box
+    const box = await ctx.db.query.lootBox({where}, `{ id title }`);
+    // check if they have the permission to do it
+    const hasPermissions = ctx.request.user.permissions.some(permission => ['ADMIN'].includes(permission));
+    if(!hasPermissions) {
+      throw new Error("You don't have permission to do that!");
+    }
+    // delete it!
+    return ctx.db.mutation.deleteLootBox({ where }, info);
+  },
+  async openLootBox(parent, args, ctx, info) {
+    // 1. check if they're logged in
+    if(!ctx.request.userId) {
+      throw new Error('You must be logged in to do that!');
+    }
+    // 2. query current user
+    const where = { id: ctx.request.userId };
+    const currentUser = await ctx.db.query.user({where}, `{ id, username, permissions, name, classTitle, image}`);
+
+    // 4. Find and make sure the player is killable
+    const lootBox = await ctx.db.query.lootBox({
+      where: {
+        unlockCode: args.unlockCode,
+      },
+    }, `{ id, title, description, effect, newTitle, newLife, claimed}`);
+    if(!lootBox) throw new Error('No lootbox with that code!');
+    if(lootBox.claimed) throw new Error('Yikes, an empty loot box. Looks someone got here before you!');
+
+    var effect = lootBox.effect;
+
+    function claimBox() {
+      const claimedBox = ctx.db.mutation.updateLootBox({
+        data: {
+          claimed: true,
+        },
+        where: { id: lootBox.id },
+      }, info);
+      return lootBox;
+    }
+
+    async function giveTitle() {
+      const setTitle = await ctx.db.mutation.updateUser({
+        data: {
+          classTitle: lootBox.newTitle,
+        },
+        where: { id: currentUser.id },
+      }, info);
+
+      const titleAnnouncement = `<strong>${currentUser.username}</strong> opened a loot box and got the ${lootBox.newTitle} class!`;
+      const titleUpdate = await ctx.db.mutation.createUpdate({
+        data: {
+          image: currentUser.image,
+          title: titleAnnouncement
+        }
+      }, info);
+
+    }
+
+    async function killPlayer(giveTitle) {
+      const phrases = ["Welcome to the zombie team!","Nothing like that new zombie smell.","Time for brain eating class.","Whoops, I hope you like brains."];
+      let randIndex = Math.floor(Math.random() * phrases.length);
+      let randPhrase = phrases[randIndex];
+
+      let permissionsArray = currentUser.permissions;
+      let permissionIndex = permissionsArray.indexOf('HUMAN');
+      permissionsArray.splice(permissionIndex, 1);
+      permissionsArray.push('ZOMBIE');
+      const newZombie = await ctx.db.mutation.updateUser({
+        data: {
+          filterStatus: "ZOMBIE",
+          permissions: { set: permissionsArray },
+          classTitle: '',
+        },
+        where: { id: currentUser.id },
+      }, info);
+
+      const announcement = `<strong>${currentUser.username}</strong> opened a Loot Box and got killed! ${randPhrase}`;
+      const buildUpdate = await ctx.db.mutation.createUpdate({
+        data: {
+          image: currentUser.image,
+          title: announcement
+        }
+      }, info);
+
+      if(giveTitle) {
+        const setTitle = await ctx.db.mutation.updateUser({
+          data: {
+            classTitle: lootBox.newTitle,
+          },
+          where: { id: currentUser.id },
+        }, info);
+
+        const titleAnnouncement = `<strong>${currentUser.username}</strong> opened a loot box and got the ${lootBox.newTitle} class!`;
+        const titleUpdate = await ctx.db.mutation.createUpdate({
+          data: {
+            image: currentUser.image,
+            title: titleAnnouncement
+          }
+        }, info);
+      }
+    }
+
+    async function resurrectPlayer(giveTitle) {
+      const phrases = ["Oh, and smells kind of bad...","Hopefully they lose their taste for brains.","And they've still got most of their skin!","Somebody get this person a twinkie!"];
+      let randIndex = Math.floor(Math.random() * phrases.length);
+      let randPhrase = phrases[randIndex];
+
+      let permissionsArray = currentUser.permissions;
+      let zombieIndex = permissionsArray.indexOf('ZOMBIE');
+      permissionsArray.splice(zombieIndex, 1);
+      permissionsArray.push('HUMAN');
+      const newHuman = await ctx.db.mutation.updateUser({
+        data: {
+          filterStatus: "HUMAN",
+          permissions: { set: permissionsArray },
+          classTitle: '',
+        },
+        where: { id: currentUser.id },
+      }, info);
+
+      const resurrectionAnnouncement = `<strong>${currentUser.username}</strong> opened a Loot Box and got resurrected! ${randPhrase}`;
+      const buildUpdate = await ctx.db.mutation.createUpdate({
+        data: {
+          image: currentUser.image,
+          title: resurrectionAnnouncement
+        }
+      }, info);
+      if(giveTitle) {
+        const setTitle = await ctx.db.mutation.updateUser({
+          data: {
+            classTitle: lootBox.newTitle,
+          },
+          where: { id: currentUser.id },
+        }, info);
+
+        const titleAnnouncement = `<strong>${currentUser.username}</strong> opened a loot box and got the ${lootBox.newTitle} class!`;
+        const titleUpdate = await ctx.db.mutation.createUpdate({
+          data: {
+            image: currentUser.image,
+            title: titleAnnouncement
+          }
+        }, info);
+      }
+    }
+    // Resurrection
+    if(effect == "resurrect") {
+      if(currentUser.permissions.some(permission => ['HUMAN'].includes(permission))) {
+        claimBox();
+      }
+      resurrectPlayer();
+      claimBox();
+    }
+
+    // Murder
+    if(effect == "kill") {
+      if(currentUser.permissions.some(permission => ['ZOMBIE'].includes(permission))) {
+        lootBox.claimed = true;
+        return lootBox;
+      }
+      killPlayer();
+      claimBox();
+    }
+
+    // Reverse
+    if(effect == "reverse") {
+      if(currentUser.permissions.some(permission => ['ZOMBIE'].includes(permission))) {
+        resurrectPlayer();
+        claimBox();
+      }
+      killPlayer();
+      claimBox();
+    }
+
+    // Give Title
+    if(effect == "givetitle") {
+      // human title
+      if(lootBox.newLife == "human") {
+        if(currentUser.permissions.some(permission => ['HUMAN'].includes(permission))) {
+          giveTitle();
+          claimBox();
+        }
+        resurrectPlayer('withTitle');
+        claimBox();
+      }
+      // Zombie Title
+      if(currentUser.permissions.some(permission => ['ZOMBIE'].includes(permission))) {
+        giveTitle();
+        claimBox();
+      }
+      killPlayer('withTitle');
+      claimBox();
+    }
+
+    return lootBox;
   },
 
   async updateCurrencyOneName(parent, args, ctx, info) {
@@ -115,6 +333,9 @@ const Mutations = {
         ...args,
         password,
         deathCode,
+        filterStatus: 'HUMAN',
+        admin: false,
+        killCount: 0,
         permissions: { set: ['HUMAN'] },
       }
     }, info);
@@ -125,6 +346,14 @@ const Mutations = {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
     });
+
+    // 7. Let everyone know!
+    const signupAnnouncement = `<strong>${args.username}</strong> joined the game!`;
+    const buildUpdate = await ctx.db.mutation.createUpdate({
+      data: {
+        title: signupAnnouncement
+      }
+    }, info);
     // return the user to the browser
     return user;
   },
@@ -260,13 +489,87 @@ const Mutations = {
     }, info);
     // 3. Check if they have permissions to do this
     hasPermission(currentUser, ['ADMIN', 'PERMISSIONUPDATE']);
+    let filterStatus = '';
+    let admin = false;
+    if(args.permissions.some(permission => ['HUMAN'].includes(permission))) {
+      filterStatus = 'HUMAN';
+    } else {
+      filterStatus = 'ZOMBIE';
+    }
+    if(args.permissions.some(permission => ['ADMIN'].includes(permission))) {
+      admin = true;
+    }
     // 4. update the permissions
     return ctx.db.mutation.updateUser({
       data: {
+        filterStatus,
+        admin,
+        classTitle: '',
         permissions: { set: args.permissions },
       },
       where: { id: args.userId },
     }, info);
+  },
+
+  async deathMutation(parent, args, ctx, info) {
+    // 1. check if they're logged in
+    if(!ctx.request.userId) {
+      throw new Error('You must be logged in to do that!');
+    }
+    // 2. query current user
+    const where = { id: ctx.request.userId };
+    const currentUser = await ctx.db.query.user({where}, `{ id, username, permissions, email, name, killCount, image}`);
+    // 3. Check if they have permissions to do this
+    hasPermission(currentUser, ['ADMIN', 'PERMISSIONUPDATE', 'ZOMBIE', 'OZ']);
+    // 4. Find and make sure the player is killable
+    const deathCandidate = await ctx.db.query.user({
+      where: {
+        deathCode: args.deathCode,
+      },
+    }, `{ id, username, permissions, email, name, image}`);
+    if(!deathCandidate) {
+      throw new Error('No humans with that code!');
+    }
+    hasPermission(deathCandidate, ['HUMAN']);
+    // 5. Update the death candidate's permissions
+    let humanArray = deathCandidate.permissions;
+    let humanIndex = humanArray.indexOf('HUMAN');
+    humanArray.splice(humanIndex, 1);
+    humanArray.push('ZOMBIE');
+    // 6. Now kill the human!
+    const newZombie = ctx.db.mutation.updateUser({
+      data: {
+        filterStatus: "ZOMBIE",
+        permissions: { set: humanArray },
+      },
+      where: { deathCode: args.deathCode },
+    }, info);
+    // 7. Let everyone know!
+    const killerAnnouncement = `<strong>${currentUser.username}</strong> killed <strong>${deathCandidate.username}</strong>!`;
+    const buildUpdate = await ctx.db.mutation.createUpdate({
+      data: {
+        image: currentUser.image,
+        title: killerAnnouncement
+      }
+    }, info);
+    const killedAnnouncement = `<strong>${deathCandidate.username}</strong> is now a Zombie!`;
+    const buildKilledUpdate = await ctx.db.mutation.createUpdate({
+      data: {
+        image: deathCandidate.image,
+        title: killedAnnouncement
+      }
+    }, info);
+    //update kill count
+    // 4. update the permissions
+    const killCount = currentUser.killCount + 1;
+    const updateKillCount = ctx.db.mutation.updateUser({
+      data: {
+        killCount
+      },
+      where: { id: ctx.request.userId },
+    }, info);
+
+    return newZombie;
   }
 
 };

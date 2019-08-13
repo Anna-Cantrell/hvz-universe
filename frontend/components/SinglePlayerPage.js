@@ -55,7 +55,7 @@ class SinglePlayerPage extends Component {
           return (
             <div className="playerPageSingle">
               <Head>
-                <title>{title} | {data.user.username}</title>
+                <title>{title} | {data.user && data.user.username}</title>
               </Head>
               {this.renderButton(this.props.me.username === data.user.username, data)}
               <p>Username: {data.user.username}</p>

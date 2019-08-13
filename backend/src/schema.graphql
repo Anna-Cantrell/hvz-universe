@@ -6,7 +6,7 @@ type SuccessMessage {
 
 type Mutation {
   createUpdate(title: String): Update!
-  updateUser(id: ID!, name: String, email: String, pronouns: String, username: String, image: String): User!
+  updateUser(id: ID!, name: String, email: String, pronouns: String, username: String, image: String, classTitle: String): User!
   deleteUser(id: ID!): User
   signup(email: String!, password: String!, name: String!, username: String!, pronouns: String!, image: String): User!
   signin(email: String!, password: String!): User!
@@ -17,10 +17,15 @@ type Mutation {
   updateCurrencyTwoName(name: String!): CurrencyTwo!
   updateCurrencyThreeName(name: String!): CurrencyThree!
   updatePermissions(permissions: [Permission], userId: ID!): User
+  deathMutation(deathCode: String!, userId: ID!): User
+  createLootBox(unlockCode: String!, title: String!, description: String!, effect: String!, newTitle: String!, newLife: String!): LootBox!
+  destroyLootBox(id: ID!): LootBox
+  openLootBox(unlockCode: String!, userId: ID!): LootBox
 }
 
 type Query {
-  updates: [Update]!
+  updates(orderBy: UpdateOrderByInput, skip: Int, first: Int): [Update]!
+  lootBoxes(orderBy: LootBoxOrderByInput): [LootBox]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, first: Int): [User]!
   user(where: UserWhereUniqueInput): User
   usersConnection(where: UserWhereInput): UserConnection!
@@ -42,6 +47,8 @@ type User {
   classTitle: String
   killCount: Int
   deathCode: String!
+  filterStatus: String
+  admin: Boolean
   permissions: [Permission!]!
   currencyOne: Int
   currencyTwo: Int

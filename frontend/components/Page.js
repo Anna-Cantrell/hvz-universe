@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import Meta from '../components/Meta';
 import styled, { ThemeProvider, injectGlobal } from 'styled-components';
 
@@ -19,6 +20,7 @@ const theme = {
   fontMedium: 'font-weight: 500; font-style: normal;',
   fontBold: 'font-weight: 700; font-style: normal;',
   fontBoldItalic: 'font-weight: 700; font-style: italic;',
+  fontBlackItalic: 'font-weight: 900; font-style: italic;',
   tablet: '680px',
   desktop: '940px',
 };
@@ -26,9 +28,8 @@ const StyledPage = styled.div`
   color: ${props => props.theme.black};
 `;
 const Inner = styled.div`
-  max-width: ${props => props.theme.maxWidth};
+  width: 100%;
   margin: 0 auto;
-  padding: 20px;
 `;
 
 injectGlobal`
@@ -49,6 +50,8 @@ injectGlobal`
   }
   h1 {
     margin: 0;
+    font-weight: 900;
+    font-style: italic;
   }
 `;
 
@@ -62,6 +65,7 @@ class Page extends Component {
           <Inner>
             {this.props.children}
           </Inner>
+          <Footer />
         </StyledPage>
       </ThemeProvider>
     );

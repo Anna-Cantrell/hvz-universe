@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import UpdateStyles from './styles/UpdateStyles';
+import PlayerListStyles from './styles/PlayerListStyles';
 import Link from 'next/link';
 import DeleteUser from './DeleteUser';
 
+// <DeleteUser id={user.id}>Delete User</DeleteUser>
 
 class PlayerSingle extends Component {
   static propTypes = {
@@ -12,20 +13,35 @@ class PlayerSingle extends Component {
   render () {
     const { user } = this.props;
     return (
-      <UpdateStyles>
-        {user.image && <img src={user.image} alt={user.username} />}
+      <PlayerListStyles>
         <Link href={{
             pathname: '/player',
             query: { username: user.username }
           }}>
-          <a>
-            <div>{user.name}</div>
-            <div>{user.username}</div>
-            <div>{user.pronouns}</div>
+          <a className="link-container">
+            <div className="image-container">
+              {user.image && <img src={user.image} alt={user.username} />}
+            </div>
+            <div className="info-container">
+              <div>
+                <div><strong>{user.username}</strong></div>
+                <div>{user.name}</div>
+                <span className="meta">
+                  {user.permissions.includes('ZOMBIE') ? "zombie" : "human"}
+                </span>
+              </div>
+            </div>
+            {user.permissions.includes('ZOMBIE') && (
+              <div className="count">
+                <div>
+                  <span>kills</span>
+                  {user.killCount}
+                </div>
+              </div>
+            )}
           </a>
         </Link>
-        <DeleteUser id={user.id}>Delete User</DeleteUser>
-      </UpdateStyles>
+      </PlayerListStyles>
     );
   }
 }

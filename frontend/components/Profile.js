@@ -9,8 +9,10 @@ const Profile = props => (
     </div>
     <div className="info">
       <div className="username">{props.user.username}</div>
-      <div className="title">{props.user.permissions.includes('HUMAN') ? "Human" : "Zombie"}{props.user.classTitle ? "- " + props.user.classTitle : "" }</div>
-      <div className="meta">Meta data</div>
+      <div className="title">{props.user.permissions.includes('HUMAN') ? "Human" : "Zombie"}{props.user.classTitle ? " - " + props.user.classTitle : "" }</div>
+      {props.user.permissions.includes('ZOMBIE') && (
+        <div className="meta">kills: {props.user.killCount}</div>
+      )}
     </div>
   </section>
 );

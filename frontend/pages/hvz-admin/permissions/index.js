@@ -5,7 +5,7 @@ import PleaseSignIn from '../../../components/PleaseSignIn';
 
 const PermissionsPage = props => (
   <PleaseSignIn>
-    <PageContainer>
+    <PageContainer className="admin-page">
       <AdminSidebar />
       <div>
           <Permissions />

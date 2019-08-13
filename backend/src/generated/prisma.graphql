@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/anna-cantrell/hvz-universe/dev
-# timestamp: Sun Jul 07 2019 12:34:28 GMT-0400 (Eastern Daylight Time)
+# timestamp: Tue Aug 13 2019 16:29:10 GMT-0400 (Eastern Daylight Time)
 
 type AggregateCurrencyOne {
   count: Int!
@@ -10,6 +10,10 @@ type AggregateCurrencyThree {
 }
 
 type AggregateCurrencyTwo {
+  count: Int!
+}
+
+type AggregateLootBox {
   count: Int!
 }
 
@@ -583,33 +587,469 @@ Long can represent values between -(2^63) and 2^63 - 1.
 """
 scalar Long
 
+type LootBox implements Node {
+  id: ID!
+  unlockCode: String!
+  title: String!
+  description: String!
+  effect: String!
+  newTitle: String!
+  newLife: String!
+  claimed: Boolean!
+}
+
+"""A connection to a list of items."""
+type LootBoxConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [LootBoxEdge]!
+  aggregate: AggregateLootBox!
+}
+
+input LootBoxCreateInput {
+  id: ID
+  unlockCode: String!
+  title: String!
+  description: String!
+  effect: String!
+  newTitle: String!
+  newLife: String!
+  claimed: Boolean!
+}
+
+"""An edge in a connection."""
+type LootBoxEdge {
+  """The item at the end of the edge."""
+  node: LootBox!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum LootBoxOrderByInput {
+  id_ASC
+  id_DESC
+  unlockCode_ASC
+  unlockCode_DESC
+  title_ASC
+  title_DESC
+  description_ASC
+  description_DESC
+  effect_ASC
+  effect_DESC
+  newTitle_ASC
+  newTitle_DESC
+  newLife_ASC
+  newLife_DESC
+  claimed_ASC
+  claimed_DESC
+}
+
+type LootBoxPreviousValues {
+  id: ID!
+  unlockCode: String!
+  title: String!
+  description: String!
+  effect: String!
+  newTitle: String!
+  newLife: String!
+  claimed: Boolean!
+}
+
+type LootBoxSubscriptionPayload {
+  mutation: MutationType!
+  node: LootBox
+  updatedFields: [String!]
+  previousValues: LootBoxPreviousValues
+}
+
+input LootBoxSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LootBoxSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LootBoxSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LootBoxSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: LootBoxWhereInput
+}
+
+input LootBoxUpdateInput {
+  unlockCode: String
+  title: String
+  description: String
+  effect: String
+  newTitle: String
+  newLife: String
+  claimed: Boolean
+}
+
+input LootBoxUpdateManyMutationInput {
+  unlockCode: String
+  title: String
+  description: String
+  effect: String
+  newTitle: String
+  newLife: String
+  claimed: Boolean
+}
+
+input LootBoxWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LootBoxWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LootBoxWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LootBoxWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  unlockCode: String
+
+  """All values that are not equal to given value."""
+  unlockCode_not: String
+
+  """All values that are contained in given list."""
+  unlockCode_in: [String!]
+
+  """All values that are not contained in given list."""
+  unlockCode_not_in: [String!]
+
+  """All values less than the given value."""
+  unlockCode_lt: String
+
+  """All values less than or equal the given value."""
+  unlockCode_lte: String
+
+  """All values greater than the given value."""
+  unlockCode_gt: String
+
+  """All values greater than or equal the given value."""
+  unlockCode_gte: String
+
+  """All values containing the given string."""
+  unlockCode_contains: String
+
+  """All values not containing the given string."""
+  unlockCode_not_contains: String
+
+  """All values starting with the given string."""
+  unlockCode_starts_with: String
+
+  """All values not starting with the given string."""
+  unlockCode_not_starts_with: String
+
+  """All values ending with the given string."""
+  unlockCode_ends_with: String
+
+  """All values not ending with the given string."""
+  unlockCode_not_ends_with: String
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  effect: String
+
+  """All values that are not equal to given value."""
+  effect_not: String
+
+  """All values that are contained in given list."""
+  effect_in: [String!]
+
+  """All values that are not contained in given list."""
+  effect_not_in: [String!]
+
+  """All values less than the given value."""
+  effect_lt: String
+
+  """All values less than or equal the given value."""
+  effect_lte: String
+
+  """All values greater than the given value."""
+  effect_gt: String
+
+  """All values greater than or equal the given value."""
+  effect_gte: String
+
+  """All values containing the given string."""
+  effect_contains: String
+
+  """All values not containing the given string."""
+  effect_not_contains: String
+
+  """All values starting with the given string."""
+  effect_starts_with: String
+
+  """All values not starting with the given string."""
+  effect_not_starts_with: String
+
+  """All values ending with the given string."""
+  effect_ends_with: String
+
+  """All values not ending with the given string."""
+  effect_not_ends_with: String
+  newTitle: String
+
+  """All values that are not equal to given value."""
+  newTitle_not: String
+
+  """All values that are contained in given list."""
+  newTitle_in: [String!]
+
+  """All values that are not contained in given list."""
+  newTitle_not_in: [String!]
+
+  """All values less than the given value."""
+  newTitle_lt: String
+
+  """All values less than or equal the given value."""
+  newTitle_lte: String
+
+  """All values greater than the given value."""
+  newTitle_gt: String
+
+  """All values greater than or equal the given value."""
+  newTitle_gte: String
+
+  """All values containing the given string."""
+  newTitle_contains: String
+
+  """All values not containing the given string."""
+  newTitle_not_contains: String
+
+  """All values starting with the given string."""
+  newTitle_starts_with: String
+
+  """All values not starting with the given string."""
+  newTitle_not_starts_with: String
+
+  """All values ending with the given string."""
+  newTitle_ends_with: String
+
+  """All values not ending with the given string."""
+  newTitle_not_ends_with: String
+  newLife: String
+
+  """All values that are not equal to given value."""
+  newLife_not: String
+
+  """All values that are contained in given list."""
+  newLife_in: [String!]
+
+  """All values that are not contained in given list."""
+  newLife_not_in: [String!]
+
+  """All values less than the given value."""
+  newLife_lt: String
+
+  """All values less than or equal the given value."""
+  newLife_lte: String
+
+  """All values greater than the given value."""
+  newLife_gt: String
+
+  """All values greater than or equal the given value."""
+  newLife_gte: String
+
+  """All values containing the given string."""
+  newLife_contains: String
+
+  """All values not containing the given string."""
+  newLife_not_contains: String
+
+  """All values starting with the given string."""
+  newLife_starts_with: String
+
+  """All values not starting with the given string."""
+  newLife_not_starts_with: String
+
+  """All values ending with the given string."""
+  newLife_ends_with: String
+
+  """All values not ending with the given string."""
+  newLife_not_ends_with: String
+  claimed: Boolean
+
+  """All values that are not equal to given value."""
+  claimed_not: Boolean
+}
+
+input LootBoxWhereUniqueInput {
+  id: ID
+  unlockCode: String
+}
+
 type Mutation {
   createUser(data: UserCreateInput!): User!
+  createLootBox(data: LootBoxCreateInput!): LootBox!
   createUpdate(data: UpdateCreateInput!): Update!
   createCurrencyOne(data: CurrencyOneCreateInput!): CurrencyOne!
   createCurrencyTwo(data: CurrencyTwoCreateInput!): CurrencyTwo!
   createCurrencyThree(data: CurrencyThreeCreateInput!): CurrencyThree!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateLootBox(data: LootBoxUpdateInput!, where: LootBoxWhereUniqueInput!): LootBox
   updateUpdate(data: UpdateUpdateInput!, where: UpdateWhereUniqueInput!): Update
   updateCurrencyOne(data: CurrencyOneUpdateInput!, where: CurrencyOneWhereUniqueInput!): CurrencyOne
   updateCurrencyTwo(data: CurrencyTwoUpdateInput!, where: CurrencyTwoWhereUniqueInput!): CurrencyTwo
   updateCurrencyThree(data: CurrencyThreeUpdateInput!, where: CurrencyThreeWhereUniqueInput!): CurrencyThree
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteLootBox(where: LootBoxWhereUniqueInput!): LootBox
   deleteUpdate(where: UpdateWhereUniqueInput!): Update
   deleteCurrencyOne(where: CurrencyOneWhereUniqueInput!): CurrencyOne
   deleteCurrencyTwo(where: CurrencyTwoWhereUniqueInput!): CurrencyTwo
   deleteCurrencyThree(where: CurrencyThreeWhereUniqueInput!): CurrencyThree
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertLootBox(where: LootBoxWhereUniqueInput!, create: LootBoxCreateInput!, update: LootBoxUpdateInput!): LootBox!
   upsertUpdate(where: UpdateWhereUniqueInput!, create: UpdateCreateInput!, update: UpdateUpdateInput!): Update!
   upsertCurrencyOne(where: CurrencyOneWhereUniqueInput!, create: CurrencyOneCreateInput!, update: CurrencyOneUpdateInput!): CurrencyOne!
   upsertCurrencyTwo(where: CurrencyTwoWhereUniqueInput!, create: CurrencyTwoCreateInput!, update: CurrencyTwoUpdateInput!): CurrencyTwo!
   upsertCurrencyThree(where: CurrencyThreeWhereUniqueInput!, create: CurrencyThreeCreateInput!, update: CurrencyThreeUpdateInput!): CurrencyThree!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyLootBoxes(data: LootBoxUpdateManyMutationInput!, where: LootBoxWhereInput): BatchPayload!
   updateManyUpdates(data: UpdateUpdateManyMutationInput!, where: UpdateWhereInput): BatchPayload!
   updateManyCurrencyOnes(data: CurrencyOneUpdateManyMutationInput!, where: CurrencyOneWhereInput): BatchPayload!
   updateManyCurrencyTwoes(data: CurrencyTwoUpdateManyMutationInput!, where: CurrencyTwoWhereInput): BatchPayload!
   updateManyCurrencyThrees(data: CurrencyThreeUpdateManyMutationInput!, where: CurrencyThreeWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyLootBoxes(where: LootBoxWhereInput): BatchPayload!
   deleteManyUpdates(where: UpdateWhereInput): BatchPayload!
   deleteManyCurrencyOnes(where: CurrencyOneWhereInput): BatchPayload!
   deleteManyCurrencyTwoes(where: CurrencyTwoWhereInput): BatchPayload!
@@ -656,16 +1096,19 @@ enum Permission {
 
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  lootBoxes(where: LootBoxWhereInput, orderBy: LootBoxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LootBox]!
   updates(where: UpdateWhereInput, orderBy: UpdateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Update]!
   currencyOnes(where: CurrencyOneWhereInput, orderBy: CurrencyOneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CurrencyOne]!
   currencyTwoes(where: CurrencyTwoWhereInput, orderBy: CurrencyTwoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CurrencyTwo]!
   currencyThrees(where: CurrencyThreeWhereInput, orderBy: CurrencyThreeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CurrencyThree]!
   user(where: UserWhereUniqueInput!): User
+  lootBox(where: LootBoxWhereUniqueInput!): LootBox
   update(where: UpdateWhereUniqueInput!): Update
   currencyOne(where: CurrencyOneWhereUniqueInput!): CurrencyOne
   currencyTwo(where: CurrencyTwoWhereUniqueInput!): CurrencyTwo
   currencyThree(where: CurrencyThreeWhereUniqueInput!): CurrencyThree
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  lootBoxesConnection(where: LootBoxWhereInput, orderBy: LootBoxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LootBoxConnection!
   updatesConnection(where: UpdateWhereInput, orderBy: UpdateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UpdateConnection!
   currencyOnesConnection(where: CurrencyOneWhereInput, orderBy: CurrencyOneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CurrencyOneConnection!
   currencyTwoesConnection(where: CurrencyTwoWhereInput, orderBy: CurrencyTwoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CurrencyTwoConnection!
@@ -680,6 +1123,7 @@ type Query {
 
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  lootBox(where: LootBoxSubscriptionWhereInput): LootBoxSubscriptionPayload
   update(where: UpdateSubscriptionWhereInput): UpdateSubscriptionPayload
   currencyOne(where: CurrencyOneSubscriptionWhereInput): CurrencyOneSubscriptionPayload
   currencyTwo(where: CurrencyTwoSubscriptionWhereInput): CurrencyTwoSubscriptionPayload
@@ -689,6 +1133,7 @@ type Subscription {
 type Update implements Node {
   id: ID!
   title: String!
+  image: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -706,6 +1151,7 @@ type UpdateConnection {
 input UpdateCreateInput {
   id: ID
   title: String!
+  image: String
 }
 
 """An edge in a connection."""
@@ -722,6 +1168,8 @@ enum UpdateOrderByInput {
   id_DESC
   title_ASC
   title_DESC
+  image_ASC
+  image_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -731,6 +1179,7 @@ enum UpdateOrderByInput {
 type UpdatePreviousValues {
   id: ID!
   title: String!
+  image: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -776,10 +1225,12 @@ input UpdateSubscriptionWhereInput {
 
 input UpdateUpdateInput {
   title: String
+  image: String
 }
 
 input UpdateUpdateManyMutationInput {
   title: String
+  image: String
 }
 
 input UpdateWhereInput {
@@ -871,6 +1322,46 @@ input UpdateWhereInput {
 
   """All values not ending with the given string."""
   title_not_ends_with: String
+  image: String
+
+  """All values that are not equal to given value."""
+  image_not: String
+
+  """All values that are contained in given list."""
+  image_in: [String!]
+
+  """All values that are not contained in given list."""
+  image_not_in: [String!]
+
+  """All values less than the given value."""
+  image_lt: String
+
+  """All values less than or equal the given value."""
+  image_lte: String
+
+  """All values greater than the given value."""
+  image_gt: String
+
+  """All values greater than or equal the given value."""
+  image_gte: String
+
+  """All values containing the given string."""
+  image_contains: String
+
+  """All values not containing the given string."""
+  image_not_contains: String
+
+  """All values starting with the given string."""
+  image_starts_with: String
+
+  """All values not starting with the given string."""
+  image_not_starts_with: String
+
+  """All values ending with the given string."""
+  image_ends_with: String
+
+  """All values not ending with the given string."""
+  image_not_ends_with: String
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -935,6 +1426,8 @@ type User implements Node {
   resetTokenExpiry: Float
   killCount: Int
   deathCode: String!
+  filterStatus: String
+  admin: Boolean
   permissions: [Permission!]!
   currencyOne: Int
   currencyTwo: Int
@@ -965,6 +1458,8 @@ input UserCreateInput {
   resetTokenExpiry: Float
   killCount: Int
   deathCode: String!
+  filterStatus: String
+  admin: Boolean
   currencyOne: Int
   currencyTwo: Int
   currencyThree: Int
@@ -1011,6 +1506,10 @@ enum UserOrderByInput {
   killCount_DESC
   deathCode_ASC
   deathCode_DESC
+  filterStatus_ASC
+  filterStatus_DESC
+  admin_ASC
+  admin_DESC
   currencyOne_ASC
   currencyOne_DESC
   currencyTwo_ASC
@@ -1033,6 +1532,8 @@ type UserPreviousValues {
   resetTokenExpiry: Float
   killCount: Int
   deathCode: String!
+  filterStatus: String
+  admin: Boolean
   permissions: [Permission!]!
   currencyOne: Int
   currencyTwo: Int
@@ -1091,6 +1592,8 @@ input UserUpdateInput {
   resetTokenExpiry: Float
   killCount: Int
   deathCode: String
+  filterStatus: String
+  admin: Boolean
   currencyOne: Int
   currencyTwo: Int
   currencyThree: Int
@@ -1110,6 +1613,8 @@ input UserUpdateManyMutationInput {
   resetTokenExpiry: Float
   killCount: Int
   deathCode: String
+  filterStatus: String
+  admin: Boolean
   currencyOne: Int
   currencyTwo: Int
   currencyThree: Int
@@ -1613,6 +2118,50 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   deathCode_not_ends_with: String
+  filterStatus: String
+
+  """All values that are not equal to given value."""
+  filterStatus_not: String
+
+  """All values that are contained in given list."""
+  filterStatus_in: [String!]
+
+  """All values that are not contained in given list."""
+  filterStatus_not_in: [String!]
+
+  """All values less than the given value."""
+  filterStatus_lt: String
+
+  """All values less than or equal the given value."""
+  filterStatus_lte: String
+
+  """All values greater than the given value."""
+  filterStatus_gt: String
+
+  """All values greater than or equal the given value."""
+  filterStatus_gte: String
+
+  """All values containing the given string."""
+  filterStatus_contains: String
+
+  """All values not containing the given string."""
+  filterStatus_not_contains: String
+
+  """All values starting with the given string."""
+  filterStatus_starts_with: String
+
+  """All values not starting with the given string."""
+  filterStatus_not_starts_with: String
+
+  """All values ending with the given string."""
+  filterStatus_ends_with: String
+
+  """All values not ending with the given string."""
+  filterStatus_not_ends_with: String
+  admin: Boolean
+
+  """All values that are not equal to given value."""
+  admin_not: Boolean
   currencyOne: Int
 
   """All values that are not equal to given value."""
