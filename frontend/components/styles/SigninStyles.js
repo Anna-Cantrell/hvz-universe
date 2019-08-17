@@ -27,7 +27,7 @@ background-position: center;
       @media (min-width: ${props => props.theme.tablet}) {
         width: 50%;
         padding-left: 40px;
-        padding-top: 60px;
+        padding-top: 40px;
         text-align: left;
         h1 {
           font-size: 60px;

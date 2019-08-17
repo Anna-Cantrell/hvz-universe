@@ -27,7 +27,7 @@ class Signin extends Component {
       >
         {(reset, {error, loading, called}) => {
           return (
-            <Form method="post" onSubmit={async (e) => {
+            <Form className="reset" style={{display: "none"}} method="post" onSubmit={async (e) => {
               e.preventDefault();
               await reset();
               this.setState({email: ''})
@@ -47,7 +47,7 @@ class Signin extends Component {
                       onChange={this.saveToState} />
                   </label>
                 </div>
-                <div class="submit-container">
+                <div className="submit-container">
                   <button type="submit">Request Reset</button>
                 </div>
               </fieldset>

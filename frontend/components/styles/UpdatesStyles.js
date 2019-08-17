@@ -22,6 +22,15 @@ const UpdatesContainer = styled.div`
   .update-list-container {
     background: #fff;
   }
+  .load_more {
+    width: 100%;
+    text-align: center;
+    padding: 25px;
+    .btn {
+      padding: 8px 30px;
+      font-size: 16px;
+    }
+  }
 `;
 
 export default UpdatesContainer;

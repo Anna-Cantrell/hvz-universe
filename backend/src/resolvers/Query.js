@@ -5,6 +5,7 @@ const Query = {
   user: forwardTo('db'),
   users: forwardTo('db'),
   usersConnection: forwardTo('db'),
+  updatesConnection: forwardTo('db'),
 
   updates: forwardTo('db'),
   lootBoxes: forwardTo('db'),

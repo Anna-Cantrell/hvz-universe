@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
+import { graphql, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import UpdateSingle from './UpdateSingle';
 import styled from 'styled-components';
 import { updatesPerPage } from '../config';
-
-
-
 
 const QUERY = gql`
   query updates($skip: Int = 0, $first: Int = ${updatesPerPage}) {
@@ -18,9 +15,27 @@ const QUERY = gql`
   }
 `;
 
+const LOAD_MORE_QUERY = gql`
+  query LOAD_MORE_QUERY {
+    updatesConnection {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+
+
+
 class UpdatesList extends Component {
   state = {
     loads: 1,
+  }
+  componentDidMount() {
+    this.getLoads();
+  }
+  getLoads = () => {
+    this.setState({loads: this.props.data.updates.length / updatesPerPage});
   }
   render() {
     const {loading, errors, updates} = this.props.data;
@@ -38,9 +53,30 @@ class UpdatesList extends Component {
 
         {!loading &&
           updates &&
-          <button onClick={this.onFetchMore}>
-            Fetch More Matches
-          </button>}
+
+            <Query query={LOAD_MORE_QUERY}>
+              {({data, loading, error}) => {
+                if(loading) return <p>Loading...</p>;
+                  console.log(data);
+                const count = data.updatesConnection.aggregate.count;
+                const pages = Math.ceil(count / updatesPerPage);
+                const page = this.state.loads;
+                return (
+                  <div>
+                    {page < pages && (
+                      <div className="load_more">
+                        <button className="btn" onClick={this.onFetchMore}>
+                          Load More
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                );
+              }}
+            </Query>
+
+
+        }
       </div>
     );
   }

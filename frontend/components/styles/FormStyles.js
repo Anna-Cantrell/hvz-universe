@@ -46,7 +46,7 @@ const Form = styled.form`
     }
     label {
       position: relative;
-      padding: 10px 0;
+      padding: 8px 0;
       width: calc(50% - 10px);
       font-size: 12px;
       letter-spacing: .05em;
@@ -65,6 +65,8 @@ const Form = styled.form`
       width: 100%;
       display: flex;
       align-items: center;
+      border: 1px solid #ccc;
+      padding: 0 10px;
     }
     input[type="file"] {
       padding: 10px 0;
@@ -103,7 +105,7 @@ const Form = styled.form`
       animation: ${loading} 1s linear infinite;
     }
     .submit-container {
-      margin: 20px 0;
+      margin: 10px 0;
       width: 100%;
       text-align: center;
     }
@@ -120,6 +122,15 @@ const Form = styled.form`
         cursor: pointer;
         background: ${props => props.theme.purple};
         color: #fff;
+      }
+    }
+    .form-smol {
+      display: block;
+      width: 100%;
+      font-size: 13px;
+      margin-top: 8px;
+      a {
+        display: block;
       }
     }
   }

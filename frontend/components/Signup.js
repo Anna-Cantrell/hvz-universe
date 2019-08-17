@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import Link from 'next/link';
 import Form from './styles/FormStyles';
 import Error from './ErrorMessage';
 import { CURRENT_USER_QUERY } from './User';
@@ -11,7 +12,7 @@ const SIGNUP_MUTATION = gql`
     $name: String!,
     $password: String!,
     $username: String!,
-    $pronouns: String!,
+    $pronouns: String,
     $image: String,
     $pwCheck: String!,
   ) {
@@ -115,18 +116,17 @@ class Signup extends Component {
                       onChange={this.saveToState} />
                   </label>
                   <label htmlFor="pronouns">
-                    Pronouns*
+                    Pronouns
                     <input
                       type="text"
                       name="pronouns"
                       placeholder="pronouns"
-                      required
                       value={this.state.pronouns}
                       onChange={this.saveToState} />
                   </label>
                   <label className="file" htmlFor="file">
                     Profile Photo*
-                    <div class="media-container">
+                    <div className="media-container">
                       {this.state.image && <div className="image-preview"><img src={this.state.image} alt="Upload Preview" /></div>}
                       <input
                         type="file"
@@ -162,6 +162,11 @@ class Signup extends Component {
                 </div>
                 <div className="submit-container">
                   <button className="btn" type="submit">Get Registered</button>
+                  <span className="form-smol">Already slayin zoms or gettin brain noms?
+                    <Link href="/signin">
+                      <a>Click here to sign in</a>
+                    </Link>
+                  </span>
                 </div>
               </fieldset>
             </Form>

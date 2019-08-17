@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/anna-cantrell/hvz-universe/dev
-# timestamp: Tue Aug 13 2019 16:29:10 GMT-0400 (Eastern Daylight Time)
+# timestamp: Thu Aug 15 2019 16:19:44 GMT-0400 (Eastern Daylight Time)
 
 type AggregateCurrencyOne {
   count: Int!
@@ -1416,7 +1416,7 @@ type User implements Node {
   id: ID!
   name: String!
   email: String!
-  pronouns: String!
+  pronouns: String
   username: String!
   image: String
   largeImage: String
@@ -1448,7 +1448,7 @@ input UserCreateInput {
   id: ID
   name: String!
   email: String!
-  pronouns: String!
+  pronouns: String
   username: String!
   image: String
   largeImage: String
@@ -1522,7 +1522,7 @@ type UserPreviousValues {
   id: ID!
   name: String!
   email: String!
-  pronouns: String!
+  pronouns: String
   username: String!
   image: String
   largeImage: String
