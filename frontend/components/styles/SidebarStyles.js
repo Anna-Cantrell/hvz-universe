@@ -135,7 +135,7 @@ export const SidebarStyles = styled.div`
       @media (min-width: ${props => props.theme.desktop}) {
         flex-wrap: wrap;
       }
-      a, button {
+      a, & > button {
         flex: 1 0;
         margin: 0 6px;
         @media (min-width: 350px) {
@@ -197,6 +197,7 @@ export const SidebarStyles = styled.div`
     background: #fff;
     box-shadow: 0 0 6px -2px #999;
     text-align: center;
+    margin-bottom: 20px;
     a {
       opacity: 0;
       position: absolute;
@@ -320,6 +321,28 @@ export const SidebarStyles = styled.div`
       padding: 20px;
       margin-bottom: 0;
       display: block;
+      list-style: none;
+      li {
+        font-size: 12px;
+        letter-spacing: .05em;
+        text-transform: uppercase;
+        border-bottom: 1px solid #ebebeb;
+        &.active {
+          a {
+            color: ${props => props.theme.pink};
+          }
+        }
+        a {
+          display: block;
+          padding: 15px 10px;
+          color: #555;
+          ${props => props.theme.fontBold}
+          transition: all .3s;
+          &:hover {
+            color: ${props => props.theme.pink};
+          }
+        }
+      }
     }
   }
 `;

@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/anna-cantrell/hvz-universe/dev
-# timestamp: Thu Aug 15 2019 16:19:44 GMT-0400 (Eastern Daylight Time)
+# timestamp: Mon Aug 19 2019 16:56:55 GMT-0400 (Eastern Daylight Time)
 
 type AggregateCurrencyOne {
   count: Int!
@@ -14,6 +14,10 @@ type AggregateCurrencyTwo {
 }
 
 type AggregateLootBox {
+  count: Int!
+}
+
+type AggregatePage {
   count: Int!
 }
 
@@ -581,6 +585,9 @@ input CurrencyTwoWhereUniqueInput {
 
 scalar DateTime
 
+"""Raw JSON value"""
+scalar Json
+
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -1019,36 +1026,42 @@ input LootBoxWhereUniqueInput {
 
 type Mutation {
   createUser(data: UserCreateInput!): User!
+  createPage(data: PageCreateInput!): Page!
   createLootBox(data: LootBoxCreateInput!): LootBox!
   createUpdate(data: UpdateCreateInput!): Update!
   createCurrencyOne(data: CurrencyOneCreateInput!): CurrencyOne!
   createCurrencyTwo(data: CurrencyTwoCreateInput!): CurrencyTwo!
   createCurrencyThree(data: CurrencyThreeCreateInput!): CurrencyThree!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updatePage(data: PageUpdateInput!, where: PageWhereUniqueInput!): Page
   updateLootBox(data: LootBoxUpdateInput!, where: LootBoxWhereUniqueInput!): LootBox
   updateUpdate(data: UpdateUpdateInput!, where: UpdateWhereUniqueInput!): Update
   updateCurrencyOne(data: CurrencyOneUpdateInput!, where: CurrencyOneWhereUniqueInput!): CurrencyOne
   updateCurrencyTwo(data: CurrencyTwoUpdateInput!, where: CurrencyTwoWhereUniqueInput!): CurrencyTwo
   updateCurrencyThree(data: CurrencyThreeUpdateInput!, where: CurrencyThreeWhereUniqueInput!): CurrencyThree
   deleteUser(where: UserWhereUniqueInput!): User
+  deletePage(where: PageWhereUniqueInput!): Page
   deleteLootBox(where: LootBoxWhereUniqueInput!): LootBox
   deleteUpdate(where: UpdateWhereUniqueInput!): Update
   deleteCurrencyOne(where: CurrencyOneWhereUniqueInput!): CurrencyOne
   deleteCurrencyTwo(where: CurrencyTwoWhereUniqueInput!): CurrencyTwo
   deleteCurrencyThree(where: CurrencyThreeWhereUniqueInput!): CurrencyThree
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertPage(where: PageWhereUniqueInput!, create: PageCreateInput!, update: PageUpdateInput!): Page!
   upsertLootBox(where: LootBoxWhereUniqueInput!, create: LootBoxCreateInput!, update: LootBoxUpdateInput!): LootBox!
   upsertUpdate(where: UpdateWhereUniqueInput!, create: UpdateCreateInput!, update: UpdateUpdateInput!): Update!
   upsertCurrencyOne(where: CurrencyOneWhereUniqueInput!, create: CurrencyOneCreateInput!, update: CurrencyOneUpdateInput!): CurrencyOne!
   upsertCurrencyTwo(where: CurrencyTwoWhereUniqueInput!, create: CurrencyTwoCreateInput!, update: CurrencyTwoUpdateInput!): CurrencyTwo!
   upsertCurrencyThree(where: CurrencyThreeWhereUniqueInput!, create: CurrencyThreeCreateInput!, update: CurrencyThreeUpdateInput!): CurrencyThree!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyPages(data: PageUpdateManyMutationInput!, where: PageWhereInput): BatchPayload!
   updateManyLootBoxes(data: LootBoxUpdateManyMutationInput!, where: LootBoxWhereInput): BatchPayload!
   updateManyUpdates(data: UpdateUpdateManyMutationInput!, where: UpdateWhereInput): BatchPayload!
   updateManyCurrencyOnes(data: CurrencyOneUpdateManyMutationInput!, where: CurrencyOneWhereInput): BatchPayload!
   updateManyCurrencyTwoes(data: CurrencyTwoUpdateManyMutationInput!, where: CurrencyTwoWhereInput): BatchPayload!
   updateManyCurrencyThrees(data: CurrencyThreeUpdateManyMutationInput!, where: CurrencyThreeWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyPages(where: PageWhereInput): BatchPayload!
   deleteManyLootBoxes(where: LootBoxWhereInput): BatchPayload!
   deleteManyUpdates(where: UpdateWhereInput): BatchPayload!
   deleteManyCurrencyOnes(where: CurrencyOneWhereInput): BatchPayload!
@@ -1068,6 +1081,39 @@ interface Node {
   id: ID!
 }
 
+type Page implements Node {
+  id: ID!
+  title: String!
+  content: Json
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type PageConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [PageEdge]!
+  aggregate: AggregatePage!
+}
+
+input PageCreateInput {
+  id: ID
+  title: String!
+  content: Json
+}
+
+"""An edge in a connection."""
+type PageEdge {
+  """The item at the end of the edge."""
+  node: Page!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
 """Information about pagination in a connection."""
 type PageInfo {
   """When paginating forwards, are there more items?"""
@@ -1083,6 +1129,216 @@ type PageInfo {
   endCursor: String
 }
 
+enum PageOrderByInput {
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+  content_ASC
+  content_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type PagePreviousValues {
+  id: ID!
+  title: String!
+  content: Json
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type PageSubscriptionPayload {
+  mutation: MutationType!
+  node: Page
+  updatedFields: [String!]
+  previousValues: PagePreviousValues
+}
+
+input PageSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PageSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PageSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PageSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: PageWhereInput
+}
+
+input PageUpdateInput {
+  title: String
+  content: Json
+}
+
+input PageUpdateManyMutationInput {
+  title: String
+  content: Json
+}
+
+input PageWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PageWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PageWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PageWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+}
+
+input PageWhereUniqueInput {
+  id: ID
+  title: String
+}
+
 enum Permission {
   ADMIN
   HUMAN
@@ -1096,18 +1352,21 @@ enum Permission {
 
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page]!
   lootBoxes(where: LootBoxWhereInput, orderBy: LootBoxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LootBox]!
   updates(where: UpdateWhereInput, orderBy: UpdateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Update]!
   currencyOnes(where: CurrencyOneWhereInput, orderBy: CurrencyOneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CurrencyOne]!
   currencyTwoes(where: CurrencyTwoWhereInput, orderBy: CurrencyTwoOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CurrencyTwo]!
   currencyThrees(where: CurrencyThreeWhereInput, orderBy: CurrencyThreeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CurrencyThree]!
   user(where: UserWhereUniqueInput!): User
+  page(where: PageWhereUniqueInput!): Page
   lootBox(where: LootBoxWhereUniqueInput!): LootBox
   update(where: UpdateWhereUniqueInput!): Update
   currencyOne(where: CurrencyOneWhereUniqueInput!): CurrencyOne
   currencyTwo(where: CurrencyTwoWhereUniqueInput!): CurrencyTwo
   currencyThree(where: CurrencyThreeWhereUniqueInput!): CurrencyThree
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  pagesConnection(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PageConnection!
   lootBoxesConnection(where: LootBoxWhereInput, orderBy: LootBoxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LootBoxConnection!
   updatesConnection(where: UpdateWhereInput, orderBy: UpdateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UpdateConnection!
   currencyOnesConnection(where: CurrencyOneWhereInput, orderBy: CurrencyOneOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CurrencyOneConnection!
@@ -1123,6 +1382,7 @@ type Query {
 
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  page(where: PageSubscriptionWhereInput): PageSubscriptionPayload
   lootBox(where: LootBoxSubscriptionWhereInput): LootBoxSubscriptionPayload
   update(where: UpdateSubscriptionWhereInput): UpdateSubscriptionPayload
   currencyOne(where: CurrencyOneSubscriptionWhereInput): CurrencyOneSubscriptionPayload

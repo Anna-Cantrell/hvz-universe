@@ -57,7 +57,6 @@ class UpdatesList extends Component {
             <Query query={LOAD_MORE_QUERY}>
               {({data, loading, error}) => {
                 if(loading) return <p>Loading...</p>;
-                  console.log(data);
                 const count = data.updatesConnection.aggregate.count;
                 const pages = Math.ceil(count / updatesPerPage);
                 const page = this.state.loads;

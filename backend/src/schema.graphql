@@ -21,6 +21,8 @@ type Mutation {
   createLootBox(unlockCode: String!, title: String!, description: String!, effect: String!, newTitle: String!, newLife: String!): LootBox!
   destroyLootBox(id: ID!): LootBox
   openLootBox(unlockCode: String!, userId: ID!): LootBox
+  createPage(title: String!, content: String): Page!
+  updatePage(id: ID!, title: String, content: Json): Page!
 }
 
 type Query {
@@ -35,6 +37,8 @@ type Query {
   currencyTwoes: [CurrencyTwo]!
   currencyThrees: [CurrencyThree]!
   adminUsers: [User]!
+  pages(where: PageWhereInput, orderBy: PageOrderByInput): [Page]!
+  page(where: PageWhereUniqueInput): Page
 }
 
 type User {

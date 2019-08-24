@@ -9,6 +9,8 @@ const Query = {
 
   updates: forwardTo('db'),
   lootBoxes: forwardTo('db'),
+  pages: forwardTo('db'),
+  page: forwardTo('db'),
   currencyOnes: forwardTo('db'),
   currencyTwoes: forwardTo('db'),
   currencyThrees: forwardTo('db'),

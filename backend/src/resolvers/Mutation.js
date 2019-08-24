@@ -19,6 +19,33 @@ const Mutations = {
     return update;
   },
 
+  async createPage(parent, args, ctx, info) {
+    // 1. check if they're logged in
+    // if(!ctx.request.userId) {
+    //   throw new Error('You must be logged in to do that!');
+    // }
+    const page = await ctx.db.mutation.createPage({
+      data: {
+        ...args
+      }
+    }, info);
+    return page;
+  },
+
+  updatePage(parent, args, ctx, info) {
+    // first take copy of the updates
+    const updates = {...args};
+    // remove id from updates
+    delete updates.id;
+    // run the update method
+    return ctx.db.mutation.updatePage({
+      data: updates,
+      where: {
+        id: args.id
+      }
+    }, info);
+  },
+
   async createLootBox(parent, args, ctx, info) {
     // 1. check if they're logged in
     if(!ctx.request.userId) {

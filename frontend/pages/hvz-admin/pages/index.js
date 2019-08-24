@@ -7,7 +7,9 @@ const CustomUpdates = props => (
   <PleaseSignIn>
     <PageContainer className="admin-page">
       <AdminSidebar />
-      <AdminPages />
+      <main>
+        <AdminPages />
+      </main>
     </PageContainer>
   </PleaseSignIn>
 );

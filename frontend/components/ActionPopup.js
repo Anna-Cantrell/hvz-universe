@@ -42,7 +42,7 @@ class PopupKill extends Component {
             userId: this.props.user.id
           }}>
         {(deathMutation, { loading, error }) => (
-          <Form method="post" onSubmit={async (e) => {
+          <Form className="actionbox zombie" method="post" onSubmit={async (e) => {
             e.preventDefault();
             console.log('submitting');
             await deathMutation();
@@ -50,11 +50,12 @@ class PopupKill extends Component {
             this.setState({ success: true});
           }}>
             <fieldset disabled={loading} aria-busy={loading}>
-              <button name="" onClick={this.props.close}>&times;</button>
-              <h2>Kill da Hooman!</h2>
+              <button className="close" onClick={this.props.close}>&times;</button>
+              <h2>Make a Zombie!</h2>
               <Error error={error} />
-              {this.state.success && "Brains everywhere! You killed them!"}
+              {this.state.success && "Brains everywhere! You got them!"}
               <label htmlFor="deathCode">
+                Enter player code to report a tag!
                 <input
                   id="deathCode"
                   name="deathCode"
@@ -92,7 +93,7 @@ class PopupUnlock extends Component {
             userId: this.props.user.id
         }}>
           {(openLootBox, { loading, error }) => (
-            <Form method="post" onSubmit={async (e) => {
+            <Form className="actionbox lootbox" method="post" onSubmit={async (e) => {
               e.preventDefault();
               const box = await openLootBox();
               const title = box.data.openLootBox.title;
@@ -101,7 +102,7 @@ class PopupUnlock extends Component {
               console.log(box.data.openLootBox);
             }}>
               <fieldset disabled={loading} aria-busy={loading}>
-                <button name="" onClick={this.props.close}>&times;</button>
+                <button className="close" onClick={this.props.close}>&times;</button>
                 <Error error={error} />
                 {this.state.success && (
                   <div className="message">
@@ -113,6 +114,7 @@ class PopupUnlock extends Component {
                   <>
                   <h2>Unlock the Box!</h2>
                   <label htmlFor="unlockCode">
+                    Enter an unlock code below to get your loot
                     <input
                       id="unlockCode"
                       name="unlockCode"

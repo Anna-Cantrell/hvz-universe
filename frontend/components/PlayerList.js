@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import PlayerSingle from './PlayerSingle';
 import Pagination from './Pagination';
 import styled from 'styled-components';
+import Router from 'next/router';
 import { playersPerPage } from '../config';
 
 const Container = styled.div`
@@ -44,7 +45,7 @@ const ALL_USERS_QUERY = gql`
 const allPlayers = (props, filterBy) => {
   return (
     <>
-      <Pagination page={props.page} />
+      <Pagination page={props.page} filterBy={filterBy} />
       <Query
         query={ALL_USERS_QUERY}
         variables={{
@@ -65,7 +66,7 @@ const allPlayers = (props, filterBy) => {
           );
         } }
       </Query>
-      <Pagination page={props.page} />
+      <Pagination page={props.page} filterBy={filterBy} />
     </>
   );
 }

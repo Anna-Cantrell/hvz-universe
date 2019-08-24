@@ -9,10 +9,6 @@ const possiblePermissions = [
   'HUMAN',
   'ZOMBIE',
   'OZ',
-  'PLAYERCREATE',
-  'PLAYERUPDATE',
-  'PLAYERDELETE',
-  'PERMISSIONUPDATE',
 ];
 
 const ADMIN_ALL_USERS_QUERY = gql`

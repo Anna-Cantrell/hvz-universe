@@ -29,7 +29,7 @@ class CustomUpdates extends Component {
     return (
       <div>
       <h2>Hark and behold your power</h2>
-      <p>This is the development custom update page. For testing and some such nonsense"</p>
+      <p>This is the development custom update page. For testing and some such nonsense</p>
       <form>
         {pages.map(page => (
           <label key={page.replace(/\s/g, '').toLowerCase()} htmlFor={page.replace(/\s/g, '').toLowerCase()}>

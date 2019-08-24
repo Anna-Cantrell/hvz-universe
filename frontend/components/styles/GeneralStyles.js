@@ -3,13 +3,12 @@ import styled from 'styled-components';
 export const PageContainer = styled.div`
   width: 100%;
   position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
   max-width: ${props => props.theme.maxWidth};
   margin: 0 auto;
   min-height: 100vh;
   @media (min-width: ${props => props.theme.desktop}) {
+    display: flex;
+    align-items: flex-start;
     flex-wrap: nowrap;
     padding: 20px;
     &.compressed {
@@ -18,12 +17,6 @@ export const PageContainer = styled.div`
       margin: 0;
       max-width: none;
     }
-  }
-  &.admin-page {
-    padding: 0px;
-    min-height: 500px;
-    align-items: normal;
-    max-width: none;
   }
   strong { ${props => props.theme.fontBold} }
   form {
@@ -43,5 +36,32 @@ export const PageContainer = styled.div`
       background: ${props => props.theme.purple};
       color: #fff;
     }
+  }
+
+  &.admin-page {
+    padding: 0px;
+    min-height: 500px;
+    align-items: normal;
+    max-width: none;
+    main {
+      @media (min-width: ${props => props.theme.desktop}) {
+        width: calc(100% - 320px);
+        padding: 40px 20px;
+      }
+    }
+  }
+`;
+
+export const SimplePage = styled.div`
+  background: #fff;
+  width: 100%;
+  padding: 20px;
+  min-height: 100%;
+  box-shadow: 0 0 6px -2px #999;
+  @media (min-width: ${props => props.theme.tablet}) {
+    margin: 0 auto;
+    padding: 30px;
+    width: calc(80% - 40px);
+    margin-bottom: 20px;
   }
 `;

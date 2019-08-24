@@ -7,8 +7,8 @@ import Link from 'next/link';
 import PaginationStyles from './styles/PaginationStyles';
 
 const PAGINATION_QUERY = gql`
-  query PAGINATION_QUERY {
-    usersConnection {
+  query PAGINATION_QUERY($where: UserWhereInput) {
+    usersConnection(where: $where) {
       aggregate {
         count
       }
@@ -17,7 +17,14 @@ const PAGINATION_QUERY = gql`
 `;
 
 const Pagination = props => (
-  <Query query={PAGINATION_QUERY}>
+  <Query
+    query={PAGINATION_QUERY}
+    variables={{
+      where: {
+        filterStatus_in: props.filterBy,
+      }
+    }}
+  >
     {({data, loading, error}) => {
       if(loading) return <p>Loading...</p>;
       const count = data.usersConnection.aggregate.count;
@@ -58,3 +65,4 @@ const Pagination = props => (
 );
 
 export default Pagination;
+export { PAGINATION_QUERY }

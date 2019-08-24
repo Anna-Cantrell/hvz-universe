@@ -7,9 +7,9 @@ const PermissionsPage = props => (
   <PleaseSignIn>
     <PageContainer className="admin-page">
       <AdminSidebar />
-      <div>
+      <main>
           <Permissions />
-      </div>
+      </main>
     </PageContainer>
   </PleaseSignIn>
 );

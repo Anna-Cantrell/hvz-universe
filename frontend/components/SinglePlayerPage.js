@@ -8,6 +8,7 @@ import Head from 'next/head';
 import { title } from '../config';
 import {CURRENCY_ONE_QUERY, CURRENCY_TWO_QUERY, CURRENCY_THREE_QUERY} from './ListCurrencies';
 import User from './User';
+import PlayerPageStyles from './styles/PlayerPageStyles';
 
 const SINGLE_PLAYER_QUERY = gql`
   query SINGLE_PLAYER_QUERY($username: String!) {
@@ -18,7 +19,8 @@ const SINGLE_PLAYER_QUERY = gql`
       username
       pronouns
       image
-      currencyOne
+      killCount
+      permissions
     }
   }
 `;
@@ -31,7 +33,7 @@ class SinglePlayerPage extends Component {
             pathname: "update",
             query: { id: data.user.id }
         }}>
-            <a><button>Edit ✏️</button></a>
+            <a><button className="editbtn">Edit ✏️</button></a>
         </Link>
       )
     }
@@ -53,17 +55,25 @@ class SinglePlayerPage extends Component {
           const currTwo = data.user.currencyTwo;
           const currThree = data.user.currencyThree;
           return (
-            <div className="playerPageSingle">
+            <PlayerPageStyles>
               <Head>
                 <title>{title} | {data.user && data.user.username}</title>
               </Head>
               {this.renderButton(this.props.me.username === data.user.username, data)}
+              {data.user.image && <img src={data.user.image} alt={data.user.username} />}
               <p>Username: {data.user.username}</p>
               <p>Name: {data.user.name}</p>
               <p>Email: {data.user.email}</p>
               <p>Pronouns: {data.user.pronouns}</p>
-              <p>Image:</p>
-              {data.user.image && <img src={data.user.image} alt={data.user.username} />}
+              {data.user.permissions.includes('ZOMBIE') ? "zombie" : "human"}
+              {data.user.permissions.includes('ZOMBIE') && (
+                <div className="count">
+                  <div>
+                    <span>kills</span>
+                    {data.user.killCount}
+                  </div>
+                </div>
+              )}
 
               <Query query={CURRENCY_ONE_QUERY}>
                 { ({data, error, loading}) => {
@@ -102,7 +112,7 @@ class SinglePlayerPage extends Component {
                 } }
               </Query>
 
-            </div>
+            </PlayerPageStyles>
           );
         }}
       </Query>

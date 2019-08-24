@@ -6,10 +6,10 @@ const Admin = props => (
   <PleaseSignIn>
     <PageContainer className="admin-page">
       <AdminSidebar />
-      <div>
+      <main>
         <p>💻</p>
         <p>This is the Admin page!!</p>
-      </div>
+      </main>
     </PageContainer>
   </PleaseSignIn>
 );
