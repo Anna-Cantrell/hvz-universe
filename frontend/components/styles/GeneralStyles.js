@@ -12,6 +12,7 @@ export const PageContainer = styled.div`
     flex-wrap: nowrap;
     padding: 20px;
     &.compressed {
+      display: block;
       flex-wrap: wrap;
       padding: 0;
       margin: 0;
@@ -49,6 +50,9 @@ export const PageContainer = styled.div`
         padding: 40px 20px;
       }
     }
+  }
+  .signin-container {
+    margin: 0 auto;
   }
 `;
 

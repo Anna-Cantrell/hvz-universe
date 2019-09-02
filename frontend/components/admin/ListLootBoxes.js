@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import Loading from '../Loading';
 
 const ALL_LOOTBOXES_QUERY = gql`
   query ALL_LOOTBOXES_QUERY {
@@ -52,7 +53,7 @@ class RenderLootBox extends Component {
 const ListLootBoxes = () => (
   <Query query={ALL_LOOTBOXES_QUERY}>
     { ({data, error, loading}) => {
-      if(loading) return <p>loading...</p>;
+      if(loading) return <Loading />;
       if(error) return <p>Error: {error.message}</p>;
       return (
         <div className="lootbox-list-container">

@@ -3,6 +3,7 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import PlayerSingle from './PlayerSingle';
 import Pagination from './Pagination';
+import Loading from './Loading';
 import styled from 'styled-components';
 import Router from 'next/router';
 import { playersPerPage } from '../config';
@@ -57,7 +58,7 @@ const allPlayers = (props, filterBy) => {
         }}
       >
         { ({data, error, loading, refetch}) => {
-          if(loading) return <p>loading...</p>;
+          if(loading) return <Loading />;
           if(error) return <p>Error: {error.message}</p>;
           return (
             <div>

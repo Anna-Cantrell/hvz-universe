@@ -12,6 +12,7 @@ const loading = keyframes`
 const Form = styled.form`
   width: 100%;
   position: relative;
+  left: 0;
   display: flex;
   margin: 20px auto;
   box-shadow: 0px 0px 12px -7px #333;
@@ -132,6 +133,52 @@ const Form = styled.form`
       a {
         display: block;
       }
+    }
+  }
+
+  &.updateplayerform {
+    max-width: 720px;
+    margin: 30px auto;
+    h3 {
+      margin-bottom: 8px;
+    }
+    .backbutton {
+      display: block;
+      margin-bottom: 30px;
+      button {
+        border: 1px solid #ccc;
+        border-radius: 0px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    label.file {
+      display: flex;
+      flex-wrap: wrap;
+      div { width: 100%; }
+      img {
+        max-height: 50px;
+        display: block;
+        margin-bottom: 20px;
+        display: inline-block;
+        margin-right: 10px;
+      }
+      input {
+        width: auto;
+      }
+    }
+    input {
+      margin-bottom: 10px;
+    }
+    button[type="submit"] {
+      margin-top: 20px;
+    }
+
+    .admin-area {
+      margin-top: 20px;
+      border-top: 1px solid #999;
+      padding-top: 20px;
     }
   }
 `;

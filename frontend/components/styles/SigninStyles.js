@@ -9,6 +9,7 @@ background-position: center;
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 20px;
+    margin: 0 auto;
     .hero-text {
       width: 100%;
       text-align: center;

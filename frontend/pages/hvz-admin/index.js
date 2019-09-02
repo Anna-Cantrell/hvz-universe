@@ -7,8 +7,7 @@ const Admin = props => (
     <PageContainer className="admin-page">
       <AdminSidebar />
       <main>
-        <p>💻</p>
-        <p>This is the Admin page!!</p>
+        <p>💻 Admin Dashboard</p>
       </main>
     </PageContainer>
   </PleaseSignIn>

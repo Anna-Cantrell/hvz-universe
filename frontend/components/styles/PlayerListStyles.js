@@ -23,16 +23,19 @@ const PlayerListStyles = styled.div`
       justify-content: center;
       border-radius: 50%;
       overflow: hidden;
+      margin-left: 15px;
       img { width: 100%; height: 100%; object-fit: cover; }
     }
 
     .info-container {
       margin-left: 15px;
+      padding-left: 15px;
       display: flex;
       align-items: center;
       flex-wrap: wrap;
       flex: 1 0;
       line-height: 1.2;
+      border-left: 2px solid #ebebeb;
       div, span { width: 100%; display: block; }
       div {
         font-size: 14px;

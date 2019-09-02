@@ -9,6 +9,9 @@ const PageEditorStyles = styled.div`
     padding: 0px 20px 10px;
     min-height: 200px;
   }
+  .editer-content {
+    max-height: 350px;
+  }
 `;
 
 export default PageEditorStyles;

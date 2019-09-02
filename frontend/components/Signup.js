@@ -90,13 +90,14 @@ class Signup extends Component {
                       name="name"
                       required
                       placeholder="name"
+                      maxlength="50"
                       value={this.state.name}
                       onChange={this.saveToState} />
                   </label>
                   <label htmlFor="email">
                     Email*
                     <input
-                      type="text"
+                      type="email"
                       name="email"
                       required
                       placeholder="email"
@@ -108,7 +109,6 @@ class Signup extends Component {
                     <input
                       type="text"
                       name="username"
-                      pattern="^[a-zA-Z0-9]*$"
                       maxLength="40"
                       required
                       placeholder="username"

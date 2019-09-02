@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PageEditor from './PageEditor';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import Loading from '../Loading';
 
 const PAGES_QUERY = gql`
   query PAGES_QUERY {
@@ -32,7 +33,7 @@ class AdminPages extends Component {
     return (
       <Query query={PAGES_QUERY}>
       { ({data, error, loading}) => {
-        if(loading) return <p>loading...</p>;
+        if(loading) return <Loading />
         if(error) return <p>Error: {error.message}</p>;
         return (
           <div>

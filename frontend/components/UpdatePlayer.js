@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Mutation, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Router from 'next/router';
+import Link from 'next/link';
 
 import Form from './styles/FormStyles';
 import Error from './ErrorMessage';
@@ -74,10 +75,9 @@ class UpdatePlayer extends Component {
     $('button[type="submit"]').prop('disabled', false);
   }
 
-  updateUser = async (e, updateUserMutation) => {
+  updateUser = async (e, updateUserMutation, username) => {
     e.preventDefault();
     console.log('updating user');
-    console.log(this.state);
     const res = await updateUserMutation({
       variables: {
         id: this.props.id,
@@ -85,6 +85,7 @@ class UpdatePlayer extends Component {
       }
     });
     console.log('updated');
+    Router.push(`/player?username=${username}`);
   }
   render() {
     return (
@@ -102,12 +103,19 @@ class UpdatePlayer extends Component {
               variables={this.state}
             >
               {(updateUser, { loading, error }) => (
-                <Form onSubmit={(e) => this.updateUser(e, updateUser)}>
+                <Form className="updateplayerform" onSubmit={(e) => this.updateUser(e, updateUser, data.user.username)}>
                   <Error error={error} />
                   <fieldset disabled={loading} aria-busy={loading}>
-                    <h3>Update Player Info</h3>
-                    <label htmlFor="file">
-                      New Profile Photo
+                    <h3>Update {data.user.username}</h3>
+                    <Link href={{
+                        pathname: "player",
+                        query: { username: data.user.username }
+                    }}>
+                        <a className="backbutton"><button>Back to profile</button></a>
+                    </Link>
+                    <label className="file" htmlFor="file">
+                      <div>New Profile Photo</div>
+                      {this.state.image && <img src={this.state.image} alt="Upload Preview" />}
                       <input
                         type="file"
                         id="file"
@@ -115,7 +123,6 @@ class UpdatePlayer extends Component {
                         placeholder="Upload a profile photo"
                         onChange={this.uploadFile}
                       />
-                    {this.state.image && <img src={this.state.image} alt="Upload Preview" />}
                     </label>
                     <label htmlFor="name">
                       Name
@@ -158,7 +165,7 @@ class UpdatePlayer extends Component {
 
                     {this.props.me.permissions.includes('ADMIN') && (
                       <div className="admin-area">
-                        <p>These are administrative changes to the profile. Double check your changes before you submit!</p>
+                        <p>These are administrative changes to the profile. <br />Double check your changes before you submit!</p>
                         <label htmlFor="username">
                           Username
                           <input
@@ -178,7 +185,6 @@ class UpdatePlayer extends Component {
                             id="classTitle"
                             name="classTitle"
                             placeholder="Class Title"
-                            required
                             defaultValue={data.user.classTitle}
                             onChange={this.handleChange}
                           />

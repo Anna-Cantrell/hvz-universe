@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { EditorState, convertFromRaw } from 'draft-js';
 import { stateToHTML } from 'draft-js-export-html';
 import { SimplePage } from './styles/GeneralStyles';
+import Loading from './Loading';
 
 
 const SINGLE_PAGE_QUERY = gql`
@@ -30,13 +31,16 @@ class PageContent extends Component {
           title: this.props.title,
         }}>
         {({error, loading, data}) => {
-          if(loading) return <p>loading...</p>;
+          if(loading) return <Loading />;
           if(error) return <p>Error: {error.message}</p>;
 
-          const parsedContent = stateToHTML(convertFromRaw(data.page.content));
+          const parsedContent = data.page ? stateToHTML(convertFromRaw(data.page.content)) : "coming soon";
+          let decodeContent = parsedContent.replace(/&lt;/g, '<');
+          decodeContent = decodeContent.replace(/&gt;/g, '>');
           return (
             <SimplePage>
-              <div dangerouslySetInnerHTML={{ __html: parsedContent}}></div>
+              {console.log(decodeContent)}
+              <div dangerouslySetInnerHTML={{ __html: decodeContent}}></div>
             </SimplePage>
           );
         } }

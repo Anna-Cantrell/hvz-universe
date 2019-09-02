@@ -35,7 +35,9 @@ class UpdatesList extends Component {
     this.getLoads();
   }
   getLoads = () => {
-    this.setState({loads: this.props.data.updates.length / updatesPerPage});
+    if(this.props.data.updates) {
+      this.setState({loads: this.props.data.updates.length / updatesPerPage});
+    }
   }
   render() {
     const {loading, errors, updates} = this.props.data;
@@ -59,7 +61,7 @@ class UpdatesList extends Component {
                 if(loading) return <p>Loading...</p>;
                 const count = data.updatesConnection.aggregate.count;
                 const pages = Math.ceil(count / updatesPerPage);
-                const page = this.state.loads;
+                const page = Math.floor(this.state.loads);
                 return (
                   <div>
                     {page < pages && (

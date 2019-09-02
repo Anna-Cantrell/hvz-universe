@@ -11,7 +11,7 @@ const AdminSidebar = props => (
       {({data, loading}) => {
         if(loading) return <p>...loading</p>;
         if(!data.me) return <p>Please log in</p>
-        if(!data.me.permissions.includes('ADMIN')) return <p>This is an admin area.</p>;
+        if(!data.me.permissions.includes('ADMIN')) return <p>This is an admin area. Please log in as an admin user to continue.</p>;
         const path = Router.router && Router.router.pathname;
         return (
           <ul className="main-sidebar">

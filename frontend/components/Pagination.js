@@ -26,7 +26,6 @@ const Pagination = props => (
     }}
   >
     {({data, loading, error}) => {
-      if(loading) return <p>Loading...</p>;
       const count = data.usersConnection.aggregate.count;
       const pages = Math.ceil(count / playersPerPage);
       const page = props.page;
