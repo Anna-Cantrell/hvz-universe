@@ -3,5 +3,5 @@ export const endpoint = `http://localhost:4444`;
 export const prodEndpoint = `https://hvzu-backend.acantrell.now.sh/`;
 export const perPage = 4;
 export const title = "HvZ Universe";
-export const playersPerPage = 3;
-export const updatesPerPage = 3;
+export const playersPerPage = 15;
+export const updatesPerPage = 20;

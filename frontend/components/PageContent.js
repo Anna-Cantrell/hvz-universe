@@ -34,7 +34,7 @@ class PageContent extends Component {
           if(loading) return <Loading />;
           if(error) return <p>Error: {error.message}</p>;
 
-          const parsedContent = data.page ? stateToHTML(convertFromRaw(data.page.content)) : "coming soon";
+          const parsedContent = data.page.content ? stateToHTML(convertFromRaw(data.page.content)) : "coming soon";
           let decodeContent = parsedContent.replace(/&lt;/g, '<');
           decodeContent = decodeContent.replace(/&gt;/g, '>');
           return (

@@ -25,6 +25,11 @@ const Form = styled.form`
     margin: 0;
     background: #fff;
     width: 100%;
+    &.fullwidth {
+      label {
+        width: 100%;
+      }
+    }
     h2 {
       text-align: center;
       text-transform: uppercase;
@@ -39,6 +44,10 @@ const Form = styled.form`
       flex-wrap: wrap;
       width: 100%;
       justify-content: space-between;
+      padding-top: 20px;
+      label {
+        margin: 0;
+      }
       &.signin {
         label {
           width: 100%;
@@ -54,6 +63,12 @@ const Form = styled.form`
       text-transform: uppercase;
       color: ${props => props.theme.darkgray};
       ${props => props.theme.fontBold}
+      &.liferadio {
+        text-align: center;
+        span {
+          pointer-events: none;
+        }
+      }
       &.file {
         width: 100%;
       }

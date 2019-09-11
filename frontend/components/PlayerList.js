@@ -39,6 +39,7 @@ const ALL_USERS_QUERY = gql`
       image
       permissions
       killCount
+      classTitle
     }
   }
 `;

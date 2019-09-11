@@ -52,6 +52,15 @@ class Header extends Component {
             <a>view profile</a>
             </Link>
             </li>
+            {me.permissions.includes('ADMIN') && (
+              <li>
+                <Link href={{
+                  pathname: '/hvz-admin',
+                }}>
+                  <a>Admin Dashboard</a>
+                </Link>
+              </li>
+            )}
             <li><Signout /></li>
             </ul>
           )}

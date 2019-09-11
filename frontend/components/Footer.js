@@ -32,8 +32,13 @@ const Footer = () => (
                 </Link>
                 <div className="footer-info">
                   <p>HvZ Universe&copy; {new Date().getFullYear()} All rights reserved.</p>
-                  <p><a>Terms of Service</a> <a>Privacy Policy</a></p>
+                  <p>
+                    <Link href="/privacy-policy">
+                      <a>Privacy Policy</a>
+                    </Link>
+                  </p>
                 </div>
+                <Signout />
               </div>
             </div>
           </div>

@@ -79,8 +79,12 @@ class Signup extends Component {
               this.setState({ name: '', email: '', username: '', pronouns: '', password: '', pwCheck: ''})
             }}>
               <fieldset disabled={loading} aria-busy={loading}>
-                <h2>Register Today!</h2>
-                <p>Join Greensboro's Largest Game of Tag</p>
+                {this.props.page != "admin" && (
+                  <>
+                    <h2>Register Today!</h2>
+                    <p>Join Greensboro's Largest Game of Tag</p>
+                  </>
+                )}
                 <Error error={error} />
                 <div className="fields-container">
                   <label htmlFor="name">
@@ -90,7 +94,7 @@ class Signup extends Component {
                       name="name"
                       required
                       placeholder="name"
-                      maxlength="50"
+                      maxLength="50"
                       value={this.state.name}
                       onChange={this.saveToState} />
                   </label>
@@ -162,11 +166,13 @@ class Signup extends Component {
                 </div>
                 <div className="submit-container">
                   <button className="btn" type="submit">Get Registered</button>
-                  <span className="form-smol">Already slayin zoms or gettin brain noms?
-                    <Link href="/signin">
-                      <a>Click here to sign in</a>
-                    </Link>
-                  </span>
+                  {this.props.page != "admin" && (
+                    <span className="form-smol">Already slayin zoms or gettin brain noms?
+                      <Link href="/signin">
+                        <a>Click here to sign in</a>
+                      </Link>
+                    </span>
+                  )}
                 </div>
               </fieldset>
             </Form>

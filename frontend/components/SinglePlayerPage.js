@@ -102,7 +102,7 @@ class SinglePlayerPage extends Component {
           const currTwo = data.user.currencyTwo;
           const currThree = data.user.currencyThree;
           const status = data.user.permissions.includes('ZOMBIE') ? "zombie" : "human";
-          const titleId = data.user.classTitle.replace(" ", "").toLowerCase();
+          const titleId = data.user.classTitle ? data.user.classTitle.replace(" ", "").toLowerCase() : "";
           return (
             <PlayerPageStyles id="profilePrint">
               <Head>

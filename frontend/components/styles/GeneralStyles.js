@@ -19,10 +19,13 @@ export const PageContainer = styled.div`
       max-width: none;
     }
   }
+  &.privacy {
+    padding: 40px 0;
+  }
   strong { ${props => props.theme.fontBold} }
   form {
     max-width: 400px;
-    margin: 0 30px;
+    margin: 0 30px 20px;
   }
   .btn {
     text-transform: uppercase;
@@ -45,14 +48,17 @@ export const PageContainer = styled.div`
     align-items: normal;
     max-width: none;
     main {
+      padding: 40px 20px;
       @media (min-width: ${props => props.theme.desktop}) {
         width: calc(100% - 320px);
-        padding: 40px 20px;
       }
     }
   }
   .signin-container {
     margin: 0 auto;
+    form {
+      margin: 30px auto;
+    }
   }
 `;
 

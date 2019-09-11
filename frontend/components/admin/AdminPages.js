@@ -3,6 +3,8 @@ import PageEditor from './PageEditor';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Loading from '../Loading';
+import AdminPagesStyles from '../styles/AdminPagesStyles';
+
 
 const PAGES_QUERY = gql`
   query PAGES_QUERY {
@@ -36,18 +38,18 @@ class AdminPages extends Component {
         if(loading) return <Loading />
         if(error) return <p>Error: {error.message}</p>;
         return (
-          <div>
-            <h1>Pages!</h1>
+          <AdminPagesStyles>
+            <h1>Pages</h1>
             {data.pages.map(page => (
-              <label key={page.title} htmlFor={page.title}>
-                {page.title}
+              <label className="page-radio" key={page.title} htmlFor={page.title}>
                 <input
-                type="radio"
-                id={page.title}
-                checked={page.title == this.state.page}
-                name="page"
-                onChange={(e) => { this.changeState(e, page.id, page.content) } }
-                value={page.title} />
+                  type="radio"
+                  id={page.title}
+                  checked={page.title == this.state.page}
+                  name="page"
+                  onChange={(e) => { this.changeState(e, page.id, page.content) } }
+                  value={page.title} />
+                <span>{page.title}</span>
               </label>
             ))}
             {data.pages.map(page => (
@@ -55,7 +57,7 @@ class AdminPages extends Component {
                 {this.state.page == page.title && <PageEditor content={page.content} id={page.id} page={page.title} />}
               </div>
             ))}
-          </div>
+          </AdminPagesStyles>
         );
       } }
       </Query>

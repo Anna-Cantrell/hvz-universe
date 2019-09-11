@@ -35,7 +35,7 @@ const HeaderStyles = styled.div`
     padding-top: 10px;
   }
   .bar {
-    height:54px;
+    height:70px;
     display: flex;
     justify-content: space-between;
     align-items: center;

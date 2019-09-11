@@ -3,10 +3,12 @@ import styled from 'styled-components';
 const Table = styled.table`
   border-spacing: 0;
   width: 100%;
-  border: 1px solid ${props => props.theme.offWhite};
+  font-size: 14px;
+  box-shadow: 0 0 6px -2px #999;
   thead {
     font-size: 10px;
   }
+  th { background: #fff; }
   td,
   th {
     border-bottom: 1px solid ${props => props.theme.offWhite};
@@ -26,6 +28,9 @@ const Table = styled.table`
     }
   }
   tr {
+    background: #f5d6f9;
+    transition: all .2s;
+    &:nth-child(2n) { background: #f9e7fc; }
     &:hover {
       background: ${props => props.theme.offWhite};
     }

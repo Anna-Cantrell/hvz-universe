@@ -18,6 +18,18 @@ const Mutations = {
     }, info);
     return update;
   },
+  async deleteUpdate(parent, args, ctx, info) {
+    const where = { id: args.id };
+    // find the loot box
+    const update = await ctx.db.query.update({where}, `{ id title }`);
+    // check if they have the permission to do it
+    const hasPermissions = ctx.request.user.permissions.some(permission => ['ADMIN'].includes(permission));
+    if(!hasPermissions) {
+      throw new Error("You don't have permission to do that!");
+    }
+    // delete it!
+    return ctx.db.mutation.deleteUpdate({ where }, info);
+  },
 
   async createPage(parent, args, ctx, info) {
     // 1. check if they're logged in

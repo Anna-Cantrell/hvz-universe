@@ -60,8 +60,6 @@ export const SidebarStyles = styled.div`
       overflow: hidden;
       border-radius: 50%;
       height: 100%;
-      display: flex;
-      align-items: center;
       @media (min-width: ${props => props.theme.desktop}) {
         width: 50%;
         margin: -48px auto 15px;
@@ -74,7 +72,9 @@ export const SidebarStyles = styled.div`
         top: 0;
       }
       img {
+        height: 100%;
         width: 100%;
+        object-fit: cover;
         display: block;
         position: absolute;
       }

@@ -41,6 +41,24 @@ const FooterStyles = styled.div`
         color: #ebebeb;
         font-size: 13px;
         margin: 0;
+        a {
+          color: #ebebeb;
+        }
+      }
+    }
+    button {
+      color: #ebebeb;
+      margin: 20px auto 0;
+      padding: 10px 20px;
+      border: 1px solid #ebebeb;
+      background: transparent;
+      &:hover {
+        cursor: hover;
+      }
+      @media (min-width: ${props => props.theme.tablet}) {
+        margin: 5px 0 0 auto;
+        border: none;
+        padding: 0;
       }
     }
   }

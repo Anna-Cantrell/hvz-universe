@@ -8,6 +8,7 @@ const PaginationStyles = styled.div`
   a.btn {
     font-style: italic;
     font-size: 14px;
+    color: ${props => props.theme.purple};
   }
   .pagination-container {
     display: flex;

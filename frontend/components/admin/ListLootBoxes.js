@@ -2,12 +2,19 @@ import React, { Component } from 'react';
 import { Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Loading from '../Loading';
+import LootBoxListStyles from '../styles/LootBoxListStyles';
 
 const ALL_LOOTBOXES_QUERY = gql`
   query ALL_LOOTBOXES_QUERY {
     lootBoxes(orderBy: title_ASC) {
       id
+      unlockCode
       title
+      description
+      effect
+      newTitle
+      newLife
+      claimed
     }
   }
 `;
@@ -37,12 +44,21 @@ class RenderLootBox extends Component {
       >
         {(destroyLootBox, { error }) => (
           <div className="lootbox-container">
-          {this.props.lootbox.title}
-            <button onClick={() => {
+            <div className="title">{this.props.lootbox.title} <span className="code">[{this.props.lootbox.unlockCode}]</span></div>
+            <div className="description">{this.props.lootbox.description}</div>
+            <div className="effect">Effect: {this.props.lootbox.effect}</div>
+            {this.props.lootbox.newTitle && (
+              <>
+              <div className="new-title">New Title: {this.props.lootbox.newTitle}</div>
+              <div className="new-title">New Life Status: {this.props.lootbox.newLife}</div>
+              </>
+            )}
+            <div className="claimed">{!this.props.lootbox.claimed && "un"}claimed</div>
+            <button className="deleteBox" onClick={() => {
                 if(confirm('Are you sure you want to delete this lootbox?')) {
                   destroyLootBox().catch(err => { alert(err.message) });
                 }
-              }}>Delete Loot Box</button>
+              }}>Delete</button>
           </div>
         )}
       </Mutation>
@@ -56,9 +72,9 @@ const ListLootBoxes = () => (
       if(loading) return <Loading />;
       if(error) return <p>Error: {error.message}</p>;
       return (
-        <div className="lootbox-list-container">
+        <LootBoxListStyles>
           {data.lootBoxes.map(lootbox => <RenderLootBox key={lootbox.title} lootbox={lootbox} />)}
-        </div>
+        </LootBoxListStyles>
       );
     } }
   </Query>

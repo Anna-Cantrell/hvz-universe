@@ -3,7 +3,7 @@ import { PageContainer } from '../../components/styles/GeneralStyles';
 import PleaseSignIn from '../../components/PleaseSignIn';
 
 const Admin = props => (
-  <PleaseSignIn>
+  <PleaseSignIn page="admin">
     <PageContainer className="admin-page">
       <AdminSidebar />
       <main>

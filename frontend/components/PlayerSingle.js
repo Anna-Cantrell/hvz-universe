@@ -27,7 +27,7 @@ class PlayerSingle extends Component {
                 <div><strong>{user.username}</strong></div>
                 <div>{user.name}</div>
                 <span className="meta">
-                  {user.permissions.includes('ZOMBIE') ? "zombie" : "human"}
+                  {user.permissions.includes('ZOMBIE') ? "zombie" : "human"} {user.classTitle && " - " + user.classTitle}
                 </span>
               </div>
             </div>

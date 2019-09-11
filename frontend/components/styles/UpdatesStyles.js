@@ -41,4 +41,20 @@ export const SingleUpdateStyles = styled.div`
   background: #fff;
   padding: 15px 20px;
   border-bottom: 2px solid #ebebeb;
+  .deleteUpdate {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    background: transparent;
+    border: none;
+    padding: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: darkred;
+    letter-spacing: .08em;
+    font-size: 10px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 `;

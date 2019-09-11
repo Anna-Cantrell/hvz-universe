@@ -8,7 +8,7 @@
         { "src": "/.*", "dest": "src/index.js" }
     ],
     "env": {
-        "FRONTEND_URL": "https://frontend.acantrell.now.sh",
+        "FRONTEND_URL": "https://hvzuniverse.com",
         "PRISMA_ENDPOINT": "https://hvz-universe-prod-fa0991f2c8.herokuapp.com/hvz-universe-prod/prod",
         "PRISMA_SECRET": "secret",
         "APP_SECRET": "jwtsecret123",
