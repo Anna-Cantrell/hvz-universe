@@ -52,7 +52,6 @@ class CreateLootBox extends Component {
                   newTitle: '',
                   newLife: 'human',
               });
-              console.log(res);
             }}>
             <Error error={error} />
             <fieldset className="fullwidth" disabled={loading} aria-busy={loading}>

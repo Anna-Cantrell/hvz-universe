@@ -81,8 +81,8 @@ class Signup extends Component {
               <fieldset disabled={loading} aria-busy={loading}>
                 {this.props.page != "admin" && (
                   <>
-                    <h2>Register Today!</h2>
-                    <p>Join Greensboro's Largest Game of Tag</p>
+                    <h2>Register Today</h2>
+                    <p>Don't miss Greensboro's largest game of tag!</p>
                   </>
                 )}
                 <Error error={error} />

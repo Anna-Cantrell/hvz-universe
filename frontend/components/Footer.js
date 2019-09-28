@@ -38,7 +38,9 @@ const Footer = () => (
                     </Link>
                   </p>
                 </div>
-                <Signout />
+                {me && (
+                  <Signout />
+                )}
               </div>
             </div>
           </div>

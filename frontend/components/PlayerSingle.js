@@ -12,6 +12,7 @@ class PlayerSingle extends Component {
   };
   render () {
     const { user } = this.props;
+    const imageClass = user.permissions.includes('ADMIN') ? "image-container admin" : "image-container";
     return (
       <PlayerListStyles>
         <Link href={{
@@ -19,7 +20,7 @@ class PlayerSingle extends Component {
             query: { username: user.username }
           }}>
           <a className="link-container">
-            <div className="image-container">
+            <div className={imageClass}>
               {user.image && <img src={user.image} alt={user.username} />}
             </div>
             <div className="info-container">

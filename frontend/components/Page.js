@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Meta from '../components/Meta';
+import CookieBanner from '../components/CookieBanner';
 import styled, { ThemeProvider, injectGlobal } from 'styled-components';
 
 const theme = {
@@ -69,6 +70,7 @@ class Page extends Component {
             {this.props.children}
           </Inner>
           <Footer />
+          <CookieBanner />
         </StyledPage>
       </ThemeProvider>
     );

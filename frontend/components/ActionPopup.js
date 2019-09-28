@@ -99,7 +99,6 @@ class PopupUnlock extends Component {
               const title = box.data.openLootBox.title;
               const description = box.data.openLootBox.description;
               this.setState({ unlockCode: '', success: true, title, description });
-              console.log(box.data.openLootBox);
             }}>
               <fieldset disabled={loading} aria-busy={loading}>
                 <button className="close" onClick={this.props.close}>&times;</button>

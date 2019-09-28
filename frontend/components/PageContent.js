@@ -39,7 +39,6 @@ class PageContent extends Component {
           decodeContent = decodeContent.replace(/&gt;/g, '>');
           return (
             <SimplePage>
-              {console.log(decodeContent)}
               <div dangerouslySetInnerHTML={{ __html: decodeContent}}></div>
             </SimplePage>
           );

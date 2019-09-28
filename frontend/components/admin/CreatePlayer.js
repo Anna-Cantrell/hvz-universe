@@ -76,7 +76,6 @@ class CreatePlayer extends Component {
               // call the mutation
               const res = await createUser();
               // bring them to the user page
-              console.log(res);
               Router.push({
                 pathname: '/player',
                 query: {username: res.data.createUser.username}

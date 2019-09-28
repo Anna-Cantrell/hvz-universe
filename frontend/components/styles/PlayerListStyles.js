@@ -15,6 +15,7 @@ const PlayerListStyles = styled.div`
       padding: 10px 0;
     }
     .image-container {
+      position: relative;
       align-self: center;
       width: 45px;
       height: 45px;
@@ -22,9 +23,18 @@ const PlayerListStyles = styled.div`
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      overflow: hidden;
       margin-left: 15px;
-      img { width: 100%; height: 100%; object-fit: cover; }
+      img { border-radius: 50%; width: 100%; height: 100%; object-fit: cover; }
+      &.admin:after {
+        content: '';
+        position: absolute;
+        height: 18px;
+        width: 18px;
+        top: -5px;
+        right: -5px;
+        background-image: url('../../static/mod-badge.png');
+        background-size: contain;
+      }
     }
 
     .info-container {
