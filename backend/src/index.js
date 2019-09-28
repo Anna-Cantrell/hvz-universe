@@ -36,7 +36,15 @@ server.express.use(async (req, res, next) => {
 server.start({
   cors: {
     credentials: true,
-    origin: process.env.FRONTEND_URL,
+    origin: [
+      process.env.FRONTEND_URL,
+      "http://localhost:7777",
+      "http://localhost:7777/",
+      "https://frontend.acantrell.now.sh",
+      "https://frontend.acantrell.now.sh/",
+      "https://hvzuniverse.com",
+      "https://hvzuniverse.com/"
+    ],
   },
 }, deets => {
   console.log(`Server is now running on http://localhost:${deets.port}`);

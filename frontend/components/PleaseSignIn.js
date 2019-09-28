@@ -9,18 +9,6 @@ const PleaseSignIn = (props) => (
   <Query query={CURRENT_USER_QUERY}>
   {({data, loading}) => {
     if(loading) return <Loading fullscreen="true" />;
-    if(props.page == 'admin' && !data.me.permissions.includes('ADMIN')) {
-      return (
-        <PageContainer>
-          <div className="wrapper">
-            <div className="hero-text">
-              <h1>Well this is awkward...</h1>
-              <p>Looks like you don't have the cred to be here. If you think you SHOULD be allowed in then contact a moderator.</p>
-            </div>
-          </div>
-        </PageContainer>
-      )
-    }
     if(!data.me) {
       return (
         <SigninStyles>
@@ -40,6 +28,18 @@ const PleaseSignIn = (props) => (
             </div>
           </div>
         </SigninStyles>
+      )
+    }
+    if(props.page == 'admin' && !data.me.permissions.includes('ADMIN')) {
+      return (
+        <PageContainer>
+          <div className="wrapper">
+            <div className="hero-text">
+              <h1>Well this is awkward...</h1>
+              <p>Looks like you don't have the cred to be here. If you think you SHOULD be allowed in then contact a moderator.</p>
+            </div>
+          </div>
+        </PageContainer>
       )
     }
     return props.children;
