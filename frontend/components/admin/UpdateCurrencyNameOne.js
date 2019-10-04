@@ -48,9 +48,7 @@ class UpdateCurrencyNameOne extends Component {
                     // stop the form from submitting
                     e.preventDefault();
                     // call the mutation
-                    console.log(this.state.currencyOne);
                     const res = await updateCurrencyOneName();
-                    console.log(res);
                   }}>
                   <Error error={error} />
                   <fieldset disabled={loading} aria-busy={loading}>

@@ -51,7 +51,7 @@ class Sidebar extends Component {
               </div>
 
               <div  id="twitterfeed" className="twitter-feed">
-                <a className="twitter-timeline" href="https://twitter.com/amcantrell?ref_src=twsrc%5Etfw">Tweets by amcantrell</a>
+                <a className="twitter-timeline" href="https://twitter.com/hvzuncg?ref_src=twsrc%5Etfw">Tweets by HvZ UNCG</a>
                 <div><span>Loading...</span></div>
               </div>
             </SidebarStyles>

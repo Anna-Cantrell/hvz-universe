@@ -11,7 +11,6 @@ class CookieBanner extends Component {
     this.setState({hidden: true});
   }
   componentDidMount() {
-    console.log(document.cookie);
     if(document.cookie.indexOf("cookieaccept=true") === -1) {
       this.setState({hidden: false});
     }

@@ -36,7 +36,7 @@ class UpdatesList extends Component {
               {updates.map(update => <UpdateSingle update={update} key={update.id} />)}
 
               <button onClick={() => {
-                  console.log(fetchMore);
+                  // console.log(fetchMore);
 
                   // fetchMore({
                   //   variables: { date: updates[updates.length - 1].createdAt },

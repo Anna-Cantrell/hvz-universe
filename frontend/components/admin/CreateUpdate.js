@@ -38,7 +38,6 @@ class CreateUpdate extends Component {
               e.preventDefault();
               // call the mutation
               const res = await createUpdate();
-              console.log(res);
             }}>
             <Error error={error} />
             <fieldset disabled={loading} aria-busy={loading}>

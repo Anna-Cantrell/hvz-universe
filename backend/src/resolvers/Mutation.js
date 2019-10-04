@@ -87,6 +87,11 @@ const Mutations = {
     // delete it!
     return ctx.db.mutation.deleteLootBox({ where }, info);
   },
+
+
+  // =====
+  // Open a LootBox
+  // =====
   async openLootBox(parent, args, ctx, info) {
     // 1. check if they're logged in
     if(!ctx.request.userId) {
@@ -125,7 +130,7 @@ const Mutations = {
         where: { id: currentUser.id },
       }, info);
 
-      const titleAnnouncement = `<strong>${currentUser.username}</strong> opened a loot box and got the ${lootBox.newTitle} class!`;
+      const titleAnnouncement = `<strong>${currentUser.name}</strong> opened a loot box and got the ${lootBox.newTitle} class!`;
       const titleUpdate = await ctx.db.mutation.createUpdate({
         data: {
           image: currentUser.image,
@@ -153,7 +158,7 @@ const Mutations = {
         where: { id: currentUser.id },
       }, info);
 
-      const announcement = `<strong>${currentUser.username}</strong> opened a Loot Box and got killed! ${randPhrase}`;
+      const announcement = `<strong>${currentUser.name}</strong> opened a Loot Box and got killed! ${randPhrase}`;
       const buildUpdate = await ctx.db.mutation.createUpdate({
         data: {
           image: currentUser.image,
@@ -169,7 +174,7 @@ const Mutations = {
           where: { id: currentUser.id },
         }, info);
 
-        const titleAnnouncement = `<strong>${currentUser.username}</strong> opened a loot box and got the ${lootBox.newTitle} class!`;
+        const titleAnnouncement = `<strong>${currentUser.name}</strong> opened a loot box and got the ${lootBox.newTitle} class!`;
         const titleUpdate = await ctx.db.mutation.createUpdate({
           data: {
             image: currentUser.image,
@@ -197,7 +202,7 @@ const Mutations = {
         where: { id: currentUser.id },
       }, info);
 
-      const resurrectionAnnouncement = `<strong>${currentUser.username}</strong> opened a Loot Box and got resurrected! ${randPhrase}`;
+      const resurrectionAnnouncement = `<strong>${currentUser.name}</strong> opened a Loot Box and got resurrected! ${randPhrase}`;
       const buildUpdate = await ctx.db.mutation.createUpdate({
         data: {
           image: currentUser.image,
@@ -212,7 +217,7 @@ const Mutations = {
           where: { id: currentUser.id },
         }, info);
 
-        const titleAnnouncement = `<strong>${currentUser.username}</strong> opened a loot box and got the ${lootBox.newTitle} class!`;
+        const titleAnnouncement = `<strong>${currentUser.name}</strong> opened a loot box and got the ${lootBox.newTitle} class!`;
         const titleUpdate = await ctx.db.mutation.createUpdate({
           data: {
             image: currentUser.image,
@@ -221,6 +226,7 @@ const Mutations = {
         }, info);
       }
     }
+
     // Resurrection
     if(effect == "resurrect") {
       if(currentUser.permissions.some(permission => ['HUMAN'].includes(permission))) {
@@ -245,9 +251,10 @@ const Mutations = {
       if(currentUser.permissions.some(permission => ['ZOMBIE'].includes(permission))) {
         resurrectPlayer();
         claimBox();
+      } else {
+        killPlayer();
+        claimBox();
       }
-      killPlayer();
-      claimBox();
     }
 
     // Give Title
@@ -257,17 +264,21 @@ const Mutations = {
         if(currentUser.permissions.some(permission => ['HUMAN'].includes(permission))) {
           giveTitle();
           claimBox();
+        } else {
+          resurrectPlayer('withTitle');
+          claimBox();
         }
-        resurrectPlayer('withTitle');
-        claimBox();
+      } else {
+        // Zombie Title
+        if(currentUser.permissions.some(permission => ['ZOMBIE'].includes(permission))) {
+          giveTitle();
+          claimBox();
+        } else {
+          killPlayer('withTitle');
+          claimBox();
+        }
       }
-      // Zombie Title
-      if(currentUser.permissions.some(permission => ['ZOMBIE'].includes(permission))) {
-        giveTitle();
-        claimBox();
-      }
-      killPlayer('withTitle');
-      claimBox();
+
     }
 
     return lootBox;
@@ -408,7 +419,7 @@ const Mutations = {
     });
 
     // 7. Let everyone know!
-    const signupAnnouncement = `<strong>${args.username}</strong> joined the game!`;
+    const signupAnnouncement = `<strong>${args.name}</strong> joined the game!`;
     const buildUpdate = await ctx.db.mutation.createUpdate({
       data: {
         title: signupAnnouncement
@@ -448,6 +459,7 @@ const Mutations = {
 
   async signin(parent, {email, password}, ctx, info) {
     // check if there is a user with that email
+    email = email.toLowerCase();
     const user = await ctx.db.query.user({ where: { email } });
     if(!user) {
       throw new Error(`We couldn't find the email ${email}!`);
@@ -605,14 +617,14 @@ const Mutations = {
       where: { deathCode: args.deathCode },
     }, info);
     // 7. Let everyone know!
-    const killerAnnouncement = `<strong>${currentUser.username}</strong> killed <strong>${deathCandidate.username}</strong>!`;
+    const killerAnnouncement = `<strong>${currentUser.name}</strong> killed <strong>${deathCandidate.name}</strong>!`;
     const buildUpdate = await ctx.db.mutation.createUpdate({
       data: {
         image: currentUser.image,
         title: killerAnnouncement
       }
     }, info);
-    const killedAnnouncement = `<strong>${deathCandidate.username}</strong> is now a Zombie!`;
+    const killedAnnouncement = `<strong>${deathCandidate.name}</strong> is now a Zombie!`;
     const buildKilledUpdate = await ctx.db.mutation.createUpdate({
       data: {
         image: deathCandidate.image,
